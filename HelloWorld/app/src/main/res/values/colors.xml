@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="color_main_activity_title">#990011</color>
     <color name="color_edittext">#ececec</color>
+    <color name="edittext_background">#cecece</color>
 </resources>

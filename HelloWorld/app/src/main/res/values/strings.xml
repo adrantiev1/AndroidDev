@@ -3,4 +3,6 @@
     <string name="hello">This is my first activity!</string>
     <string name="hint_main_edittext">Enter text here</string>
     <string name="button_submit_text">Send Data</string>
+    <string name="launch_activty_button">Launch New Activty</string>
+    <string name="recive_activty_title">Recive Activity</string>
 </resources>
