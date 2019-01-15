@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/send_chatter_background_color"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/send_chatter_title"
+        android:textColor="@color/send_chatter_title_color"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/textbox_data"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="20sp"
+        android:layout_marginRight="20sp"
+        android:layout_marginTop="5sp"
+        android:background="@color/send_chatter_edit_text_background_color"
+        android:hint="@string/send_chatter_hint" />
+
+    <Button
+        android:id="@+id/button_send_data"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="5sp"
+        android:layout_marginLeft="5sp"
+        android:layout_marginRight="5sp"
+        android:layout_marginTop="5sp"
+        android:text="@string/send_chatter_button_text"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/button_view_jitters"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="5sp"
+        android:layout_marginLeft="5sp"
+        android:layout_marginRight="5sp"
+        android:text="View Jitters"
+        android:textSize="15sp" />
+</LinearLayout>
