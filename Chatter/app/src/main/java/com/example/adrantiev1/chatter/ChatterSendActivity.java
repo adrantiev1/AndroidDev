@@ -5,6 +5,9 @@ import android.os.Build;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,6 +41,41 @@ public class ChatterSendActivity extends AppCompatActivity implements View.OnCli
         reciveButton.setOnClickListener(this);
 
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.menu_item_view_chatter:
+            {
+                Intent intent = new Intent(this,ChatterSimpleListActivity.class);
+                this.startActivity(intent);
+                break;
+            }
+            case R.id.menu_item_add_chat:
+            {
+                Intent intent = new Intent(this,ChatterSendActivity.class);
+                this.startActivity(intent);
+                break;
+            }
+            case R.id.menu_item_view_jitters:
+            {
+                Intent intent = new Intent(this,ChatterReciveActivity.class);
+                this.startActivity(intent);
+                break;
+            }
+
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflator = this.getMenuInflater();
+        inflator.inflate(R.menu.main_menu,menu);
+        return true;
     }
 
     @Override

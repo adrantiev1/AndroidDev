@@ -5,4 +5,10 @@
     <string name="send_chatter_button_text">Send Chat</string>
     <string name="receive_chatter_title">Start Something</string>
     <string name="view_chatter_button_text">View chatter</string>
+    <string name="menu_item_add_chat_title">Add Chat</string>
+    <string name="menu_item_add_chat_title_condensed">Add</string>
+    <string name="menu_item_view_chat_title">View Chat</string>
+    <string name="menu_item_view_chat_title_condensed">View</string>
+    <string name="menu_item_view_jitter_title">View Jitters</string>
+    <string name="menu_item_view_jitter_title_condensed">View</string>
 </resources>

@@ -1,7 +1,11 @@
 package com.example.adrantiev1.chatter;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +20,40 @@ import java.net.URI;
 
 public class ChatterReciveActivity extends AppCompatActivity {
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.menu_item_view_chatter:
+            {
+                Intent intent = new Intent(this,ChatterSimpleListActivity.class);
+                this.startActivity(intent);
+                break;
+            }
+            case R.id.menu_item_add_chat:
+            {
+                Intent intent = new Intent(this,ChatterSendActivity.class);
+                this.startActivity(intent);
+                break;
+            }
+            case R.id.menu_item_view_jitters:
+            {
+                Intent intent = new Intent(this,ChatterReciveActivity.class);
+                this.startActivity(intent);
+                break;
+            }
+
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflator = this.getMenuInflater();
+        inflator.inflate(R.menu.main_menu,menu);
+        return true;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

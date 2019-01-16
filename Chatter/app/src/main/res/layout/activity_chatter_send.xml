@@ -43,6 +43,6 @@
         android:layout_marginBottom="5sp"
         android:layout_marginLeft="5sp"
         android:layout_marginRight="5sp"
-        android:text="View Jitters"
+        android:text="@string/menu_item_view_jitter_title"
         android:textSize="15sp" />
 </LinearLayout>
