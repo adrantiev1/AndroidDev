@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ChatterReciveActivity" />
-        <activity android:name=".ChatterSimpleListActivity"></activity>
+        <activity android:name=".ChatterSimpleListActivity" />
+        <activity android:name=".CustomListActivity"></activity>
     </application>
 
 </manifest>
