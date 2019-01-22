@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class ChatterSimpleListActivity extends ListActivity {
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

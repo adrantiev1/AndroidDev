@@ -1,10 +1,13 @@
 package com.example.adrantiev1.chatter;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,6 +28,10 @@ import java.util.List;
 
 public class ChatterSendActivity extends AppCompatActivity implements View.OnClickListener {
 
+
+    SharedPreferences prefs;
+    private static final String TAG = "ChatterSendActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +46,10 @@ public class ChatterSendActivity extends AppCompatActivity implements View.OnCli
         sendButton.setOnClickListener(this);
         Button reciveButton = (Button)findViewById(R.id.button_view_jitters);
         reciveButton.setOnClickListener(this);
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        Log.d(TAG, "in on create()");
 
 
     }
@@ -68,6 +79,12 @@ public class ChatterSendActivity extends AppCompatActivity implements View.OnCli
             case R.id.menu_Item_view_custom_list:
             {
                 Intent intent = new Intent(this,CustomListActivity.class);
+                this.startActivity(intent);
+                break;
+            }
+            case R.id.menu_item_preferences:
+            {
+                Intent intent = new Intent(this,PrefsActivity.class);
                 this.startActivity(intent);
                 break;
             }
@@ -108,13 +125,14 @@ public class ChatterSendActivity extends AppCompatActivity implements View.OnCli
     private void postToChatter(String chatter)
 
     {
+        String username = prefs.getString("login_main","unknown");
         try
         {
             HttpClient client = new DefaultHttpClient();
             HttpPost post = new HttpPost("http://www.youcode.ca/JitterServlet");
             List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
             postParameters.add(new BasicNameValuePair("DATA", chatter));
-            postParameters.add(new BasicNameValuePair("LOGIN_NAME","Vasiya_Hrenova"));
+            postParameters.add(new BasicNameValuePair("LOGIN_NAME",username));
             UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(postParameters);
             post.setEntity(formEntity);
             client.execute(post);

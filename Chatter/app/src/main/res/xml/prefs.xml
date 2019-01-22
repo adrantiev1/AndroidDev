@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:key="login_name"
+        android:title="Login Name"
+        android:summary="Enter your alias here" />
+    <EditTextPreference
+        android:key="login_password"
+        android:title="Login Password"
+        android:summary="Enter your password here"
+        android:password="true"/>
+
+</PreferenceScreen>

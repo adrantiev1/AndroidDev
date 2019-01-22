@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context="com.example.adrantiev1.chatter.CustomListActivity">
     <ListView
-        android:id="@id/android:list"
+        android:id="@+id/listview_custom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#1c1c1c"
@@ -15,12 +15,12 @@
         android:drawSelectorOnTop="false"
         android:divider="#ffff00"
         android:dividerHeight="2sp"/>
-    <TextView
-        android:text="No Data available"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:gravity="center_horizontal"
-        android:id="@id/android:empty"
-        />
+    <!--<TextView-->
+        <!--android:text="No Data available"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:gravity="center_horizontal"-->
+        <!--android:id="@id/android:empty"-->
+        <!--/>-->
 
 </LinearLayout>

@@ -3,6 +3,8 @@ package com.example.adrantiev1.chatter;
 import android.app.ListActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
@@ -16,11 +18,13 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-public class CustomListActivity extends ListActivity
+public class CustomListActivity extends AppCompatActivity
 {
     ArrayList<HashMap<String,String>> chatter = new ArrayList<HashMap<String, String>>();
 
+//    private static final String TAG = "CustomListActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +37,10 @@ public class CustomListActivity extends ListActivity
         String[] keys = new String[]{"sender","date","message"};
         int[] ids = new int[]{R.id.custom_row_sender,R.id.custom_row_date,R.id.custom_row_message};
         SimpleAdapter adapter = new SimpleAdapter(this,chatter,R.layout.custom_row_layout,keys,ids);
+        ListView listView= (ListView)findViewById(R.id.listview_custom);
         populateList();
-        setListAdapter(adapter);
+        listView.setAdapter(adapter);
+        
     }
     private  void populateList()
     {
@@ -49,6 +55,7 @@ public class CustomListActivity extends ListActivity
             String field = "";
             while((field = in.readLine())!= null)
             {
+//                Log.d(TAG, "reading from server - vslue =" + Value );
                 HashMap<String,String> temp = new HashMap<String, String>();
                 temp.put("sender",field);
                 field = in.readLine();
