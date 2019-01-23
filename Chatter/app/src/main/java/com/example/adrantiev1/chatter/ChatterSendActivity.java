@@ -2,6 +2,7 @@ package com.example.adrantiev1.chatter;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
@@ -26,10 +27,11 @@ import org.apache.http.message.BasicNameValuePair;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatterSendActivity extends AppCompatActivity implements View.OnClickListener {
+public class ChatterSendActivity extends AppCompatActivity implements View.OnClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
 
     SharedPreferences prefs;
+    View mainview;
     private static final String TAG = "ChatterSendActivity";
 
     @Override
@@ -48,6 +50,11 @@ public class ChatterSendActivity extends AppCompatActivity implements View.OnCli
         reciveButton.setOnClickListener(this);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefs.registerOnSharedPreferenceChangeListener(this);
+        mainview = findViewById(R.id.layout_send_activity);
+        String bgColor = prefs.getString("main_bg_color", "#1c2c3c");
+        mainview.setBackgroundColor(Color.parseColor(bgColor));
+
 
         Log.d(TAG, "in on create()");
 
@@ -143,5 +150,11 @@ public class ChatterSendActivity extends AppCompatActivity implements View.OnCli
             Toast.makeText(this,"Error: " + e,Toast.LENGTH_LONG).show();
         }
 
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+        String bgColor = prefs.getString("main_bg_color", "#1c2c3c");
+        mainview.setBackgroundColor(Color.parseColor(bgColor));
     }
 }

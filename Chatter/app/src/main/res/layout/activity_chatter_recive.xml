@@ -3,7 +3,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="@color/receive_chatter_background_color">
+    android:background="@color/receive_chatter_background_color"
+    android:id="@+id/layout_send_activity">
 
     <TextView
         android:layout_height="wrap_content"

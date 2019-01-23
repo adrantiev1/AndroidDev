@@ -1,9 +1,13 @@
 package com.example.adrantiev1.chatter;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
@@ -42,6 +46,56 @@ public class CustomListActivity extends AppCompatActivity
         listView.setAdapter(adapter);
         
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.menu_item_view_chatter:
+            {
+                Intent intent = new Intent(this,ChatterSimpleListActivity.class);
+                this.startActivity(intent);
+                break;
+            }
+            case R.id.menu_item_add_chat:
+            {
+                Intent intent = new Intent(this,ChatterSendActivity.class);
+                this.startActivity(intent);
+                break;
+            }
+            case R.id.menu_item_view_jitters:
+            {
+                Intent intent = new Intent(this,ChatterReciveActivity.class);
+                this.startActivity(intent);
+                break;
+            }
+            case R.id.menu_Item_view_custom_list:
+            {
+                Intent intent = new Intent(this,CustomListActivity.class);
+                this.startActivity(intent);
+                break;
+            }
+            case R.id.menu_item_preferences:
+            {
+                Intent intent = new Intent(this,PrefsActivity.class);
+                this.startActivity(intent);
+                break;
+            }
+
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflator = this.getMenuInflater();
+        inflator.inflate(R.menu.main_menu,menu);
+        return true;
+    }
+
+
+
     private  void populateList()
     {
         BufferedReader in = null;

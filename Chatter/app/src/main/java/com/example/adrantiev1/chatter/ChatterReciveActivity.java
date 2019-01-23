@@ -1,11 +1,15 @@
 package com.example.adrantiev1.chatter;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +24,9 @@ import java.net.URI;
 
 public class ChatterReciveActivity extends AppCompatActivity {
 
+
+    SharedPreferences prefs;
+    View mainview;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId())
@@ -48,6 +55,12 @@ public class ChatterReciveActivity extends AppCompatActivity {
                 this.startActivity(intent);
                 break;
             }
+            case R.id.menu_item_preferences:
+            {
+                Intent intent = new Intent(this,PrefsActivity.class);
+                this.startActivity(intent);
+                break;
+            }
 
         }
         return true;
@@ -65,6 +78,11 @@ public class ChatterReciveActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatter_recive);
         getFromChatter();
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mainview = findViewById(R.id.layout_send_activity);
+        String bgColor = prefs.getString("main_bg_color", "#1c2c3c");
+        mainview.setBackgroundColor(Color.parseColor(bgColor));
     }
 
     private void getFromChatter()
