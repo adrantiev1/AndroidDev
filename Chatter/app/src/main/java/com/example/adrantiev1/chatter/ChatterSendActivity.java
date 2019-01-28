@@ -3,9 +3,11 @@ package com.example.adrantiev1.chatter;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -56,6 +60,19 @@ public class ChatterSendActivity extends AppCompatActivity implements View.OnCli
         mainview.setBackgroundColor(Color.parseColor(bgColor));
 
 
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP )
+        {
+            ActionBar bar  = this.getSupportActionBar();
+            bar.setBackgroundDrawable((new ColorDrawable(Color.parseColor(bgColor))));
+
+            bar.setDisplayHomeAsUpEnabled(true);
+            bar.setHomeAsUpIndicator(R.mipmap.ic_rip_round);
+
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.parseColor("#009999"));
+        }
         Log.d(TAG, "in on create()");
 
 
@@ -156,5 +173,17 @@ public class ChatterSendActivity extends AppCompatActivity implements View.OnCli
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
         String bgColor = prefs.getString("main_bg_color", "#1c2c3c");
         mainview.setBackgroundColor(Color.parseColor(bgColor));
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP )
+        {
+            ActionBar bar  = this.getSupportActionBar();
+            bar.setBackgroundDrawable((new ColorDrawable(Color.parseColor(bgColor))));
+
+            bar.setDisplayHomeAsUpEnabled(true);
+
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.parseColor("#009999"));
+        }
     }
 }

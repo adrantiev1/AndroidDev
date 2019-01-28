@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <TableRow
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:text="account"
+            android:width="120dp"/>
+        <EditText
+            android:width="200dp"
+            android:background="#cccccc"/>
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="Password"
+            android:width="120dp"/>
+        <EditText
+            android:width="200dp"
+            android:background="#cccccc"
+            android:password="true"/>
+    </TableRow>
+    <TableRow>
+        <TextView
+
+            android:width="120dp"/>
+        <android.support.v7.widget.AppCompatCheckBox
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Remember password"/>
+    </TableRow>
+    <TableRow>
+        <Button
+            android:text="Log In"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"/>
+    </TableRow>
+
+</TableLayout>
