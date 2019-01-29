@@ -11,6 +11,8 @@
         android:titleCondensed="@string/menu_item_view_jitter_title_condensed"/>
     <item android:id="@+id/menu_Item_view_custom_list"
         android:title="View Custom List" />
+    <item android:id="@+id/menu_Item_color_spinner"
+        android:title="Color Spinner" />
     <item android:id="@+id/menu_item_preferences"
         android:title="Preferences"/>
 </menu>

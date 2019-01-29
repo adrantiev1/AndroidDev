@@ -112,6 +112,19 @@ public class ChatterSendActivity extends AppCompatActivity implements View.OnCli
                 this.startActivity(intent);
                 break;
             }
+            //clicking icon take to the selected(CustomListActivity) class
+            case android.R.id.home:
+            {
+                Intent intent = new Intent(this,CustomListActivity.class);
+                this.startActivity(intent);
+                break;
+            }
+            case R.id.menu_Item_color_spinner:
+            {
+                Intent intent = new Intent(this,ColorSpinnerActivity.class);
+                this.startActivity(intent);
+                break;
+            }
 
         }
         return true;

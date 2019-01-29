@@ -21,7 +21,8 @@
         <activity android:name=".ChatterReciveActivity" />
         <activity android:name=".ChatterSimpleListActivity" />
         <activity android:name=".CustomListActivity" />
-        <activity android:name=".PrefsActivity"></activity>
+        <activity android:name=".PrefsActivity" />
+        <activity android:name=".ColorSpinnerActivity"></activity>
     </application>
 
 </manifest>
