@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    >
+
+    <EditText
+        android:id="@+id/textbox_nominee"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20sp"
+        android:layout_marginRight="20sp"
+        android:layout_marginTop="10sp"
+        android:hint="@string/nominee_hint"
+        android:background="@drawable/rounded_edittext"
+        />
+
+        />
+    <EditText
+        android:id="@+id/textbox_review"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="20sp"
+        android:layout_marginRight="20sp"
+        android:layout_marginTop="10sp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="@string/review_hint" />
+
+    <Button
+        android:id="@+id/button_send_review"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginBottom="5sp"
+        android:layout_marginLeft="5sp"
+        android:layout_marginRight="20sp"
+        android:layout_marginTop="10sp"
+        android:background="@drawable/rounded_edittext"
+        android:text="@string/send_review"
+        android:textSize="15sp" />
+
+    <RadioGroup
+        android:layout_width="192dp"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/radioBestPicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/radio_best_picture"
+            android:checked="true"/>
+        <RadioButton
+            android:id="@+id/radioBestActor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/radio_best_actor"
+            android:checked="false"/>
+        <RadioButton
+            android:id="@+id/radioBestActress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/radio_best_actress"
+            android:checked="false"/>
+        <RadioButton
+            android:id="@+id/radioFilmEditing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/radio_film_editing"
+            android:checked="false"/>
+        <RadioButton
+            android:id="@+id/radioVisualEffects"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/radio_visual_effects"
+            android:checked="false"/>
+    </RadioGroup>
+
+
+</LinearLayout>
