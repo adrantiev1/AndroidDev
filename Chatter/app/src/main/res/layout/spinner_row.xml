@@ -1,24 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
-    <TextView
+<TextView
+    android:id="@+id/tv_row_sender"
     android:layout_width="75dp"
     android:layout_height="wrap_content"
     android:layout_alignParentLeft="true"
     android:layout_alignParentTop="true"
     android:background="#aacc22"
-        android:ellipsize="end"
-        />
-    <TextView
-        android:layout_width="75dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="#aa22dd"/>
-    <TextView
+    android:ellipsize="end"
+    android:maxLines="1"
+    android:scrollHorizontally="true"
+    android:textColor="#000000"
+    android:textSize="14sp"/>
+<TextView
+    android:id="@+id/tv_row_date"
+    android:layout_width="125dp"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_toRightOf="@id/tv_row_sender"
+    android:background="#aa22dd"
+    android:textColor="#000000"
+    android:textSize="14sp"
+    />
+<TextView
+    android:id="@+id/tv_row_message"
     android:layout_width="75dp"
     android:layout_height="wrap_content"
-    android:layout_alignParentLeft="true"
+    android:layout_toRightOf="@id/tv_row_date"
     android:layout_alignParentTop="true"
-    android:background="#ffaa55"/>
+    android:background="#ffaa55"
+    android:ellipsize="end"
+    android:maxLines="1"
+    android:scrollHorizontally="true"
+    android:textColor="#000000"
+    android:textSize="14sp"/>
+
 </RelativeLayout>
