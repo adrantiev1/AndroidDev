@@ -15,4 +15,6 @@
         android:title="Color Spinner" />
     <item android:id="@+id/menu_item_preferences"
         android:title="Preferences"/>
+    <item android:id="@+id/menu_item_chat_spinner"
+        android:title="Chat Spinner"/>
 </menu>

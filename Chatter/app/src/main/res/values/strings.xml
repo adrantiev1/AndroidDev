@@ -11,4 +11,6 @@
     <string name="menu_item_view_chat_title_condensed">View</string>
     <string name="menu_item_view_jitter_title">View Jitters</string>
     <string name="menu_item_view_jitter_title_condensed">View</string>
+    <string name="spinner_prompt">select one ...</string>
+
 </resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <Spinner
+        android:id="@+id/spinner_chatter"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:dropDownWidth="125dp"
+        android:prompt= "@string/spinner_prompt"
+        />
+    <EditText
+        android:id="@+id/et_sender"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textColor="#cc44dd"
+        android:textSize="12sp"
+        android:background="#dddddd"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/et_date"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textColor="#cc44dd"
+        android:textSize="12sp"
+        android:background="#dddddd"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/et_message"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:textColor="#cc44dd"
+        android:textSize="12sp"
+        android:background="#dddddd"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"/>
+
+</LinearLayout>

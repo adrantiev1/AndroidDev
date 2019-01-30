@@ -125,6 +125,12 @@ public class ChatterSendActivity extends AppCompatActivity implements View.OnCli
                 this.startActivity(intent);
                 break;
             }
+            case R.id.menu_item_chat_spinner:
+            {
+                Intent intent = new Intent(this,ChatSpinnerActivity.class);
+                this.startActivity(intent);
+                break;
+            }
 
         }
         return true;
