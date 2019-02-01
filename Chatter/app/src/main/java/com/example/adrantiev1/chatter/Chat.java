@@ -2,6 +2,7 @@ package com.example.adrantiev1.chatter;
 
 /**
  * Created by adrantiev1 on 1/30/2019.
+ * Chat class with 3 properties Date, Sender, Content
  */
 
 public class Chat
