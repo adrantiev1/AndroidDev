@@ -3,13 +3,18 @@ package ca.nait.adrantiev1.lab_one_oscar_reviews;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -79,8 +84,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key)
+    {
+        String bgColor = prefs.getString("main_bg_color", "#1c2c3c");
+        mainview.setBackgroundColor(Color.parseColor(bgColor));
 
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP )
+        {
+            ActionBar bar  = this.getSupportActionBar();
+            bar.setBackgroundDrawable((new ColorDrawable(Color.parseColor(bgColor))));
+
+            bar.setDisplayHomeAsUpEnabled(true);
+
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.parseColor("#009999"));
+        }
     }
 
     @Override
