@@ -2,9 +2,8 @@
     <string name="app_name">Oscar Reviews</string>
     <string name="menu_item_prefs_title">Preferences</string>
     <string name="menu_item_view_reviews_title">View Reviews</string>
-    
-    
-    
+
+
     <string name="send_review">Submit Review</string>
     <string name="review_hint">Enter review here</string>
     <string name="nominee_hint">Enter nominee here</string>
