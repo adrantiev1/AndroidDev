@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
+import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -41,6 +42,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if(Build.VERSION.SDK_INT > 9 )
+        {
+            StrictMode.ThreadPolicy policy =
+                    new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
 
 
         Button sendReview = (Button)findViewById(R.id.button_send_review);
@@ -61,23 +68,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String value = ((RadioButton)findViewById(rg.getCheckedRadioButtonId()))
                 .getText().toString();
 
-        EditText editText = (EditText)findViewById(R.id.textbox_review);
-        String review = editText.getText().toString();
-        postReview(review,value);
-        editText.setText("");
+        if (value == "Best Picture")
+            value = "film";
+        else if (value== "Best Actor")
+            value = "actor";
+
+
+        EditText review_text = (EditText)findViewById(R.id.textbox_review);
+        String review = review_text.getText().toString();
+
+        EditText nominee_text = (EditText)findViewById(R.id.textbox_review);
+        String nominee = nominee_text.getText().toString();
+
+        postReview(review,value,nominee);
+
+
     }
 
-    private void postReview(String review, String value)
+    private void postReview(String review, String value,String nominee)
     {
-        String userName = prefs.getString("login_main","unknown");
+        String url = prefs.getString("url","http://www.youcode.ca/Lab01Servlet");
+        String userName = prefs.getString("login_name","Anton");
+        String pass = prefs.getString("login_password","oscar275");
 
            try
            {
                HttpClient client = new DefaultHttpClient();
-               HttpPost post = new HttpPost(" http://www.youcode.ca/?CATEGORY=" + value);
+               HttpPost post = new HttpPost("http://www.youcode.ca/Lab01Servlet");
                List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
-               postParameters.add(new BasicNameValuePair("DATA", review));
-               postParameters.add(new BasicNameValuePair("LOGIN_NAME",userName));
+
+               postParameters.add(new BasicNameValuePair("REVIEW", review));
+               postParameters.add(new BasicNameValuePair("REVIEWER",userName));
+               postParameters.add(new BasicNameValuePair("NOMINEE",nominee));
+               postParameters.add(new BasicNameValuePair("CATEGORY",value));
+               postParameters.add(new BasicNameValuePair("PASSWORD",pass));
+
                UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(postParameters);
                post.setEntity(formEntity);
                client.execute(post);

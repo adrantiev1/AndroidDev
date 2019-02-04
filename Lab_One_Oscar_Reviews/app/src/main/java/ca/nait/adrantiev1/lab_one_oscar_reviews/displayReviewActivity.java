@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +24,7 @@ import java.io.InputStreamReader;
 import java.net.URI;
 
 public class displayReviewActivity extends AppCompatActivity {
-
+    RadioGroup rg;
 
     SharedPreferences prefs;
     View mainview;
@@ -30,7 +32,13 @@ public class displayReviewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_review);
-        getReviewFromMain();
+
+        rg = (RadioGroup)findViewById(R.id.rg_category);
+        String value = ((RadioButton)findViewById(rg.getCheckedRadioButtonId()))
+                .getText().toString();
+
+
+        displayReviews(value);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -39,15 +47,22 @@ public class displayReviewActivity extends AppCompatActivity {
         mainview.setBackgroundColor(Color.parseColor(bgColor));
     }
 
-    private void getReviewFromMain()
+    private void displayReviews(String value)
     {
-        BufferedReader in = null;
+        String[] keys = new String[]{"user","date","category","nominee","review"};
+
+
+
+
+
+
+        /*BufferedReader in = null;
         TextView textView = (TextView) findViewById(R.id.textbox_receive_review);
         try
         {
             HttpClient client = new DefaultHttpClient();
             HttpGet request = new HttpGet();
-            request.setURI(new URI("http://www.youcode.ca/Lab01Servlet"));
+            request.setURI(new URI(" http://www.youcode.ca/Lab01Servlet?CATEGORY=" + value));
             HttpResponse response = client.execute(request);
             in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
             String line = "";
@@ -59,7 +74,7 @@ public class displayReviewActivity extends AppCompatActivity {
         catch (Exception e)
         {
             Toast.makeText(this,"Error: " + e,Toast.LENGTH_LONG).show();
-        }
+        }*/
     }
 
     @Override

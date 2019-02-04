@@ -57,7 +57,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/radio_best_actor"
-            android:checked="false"/>
+            android:checked="false"
+            />
         <RadioButton
             android:id="@+id/radioBestActress"
             android:layout_width="wrap_content"
