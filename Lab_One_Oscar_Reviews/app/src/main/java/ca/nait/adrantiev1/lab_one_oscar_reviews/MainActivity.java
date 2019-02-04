@@ -17,6 +17,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
@@ -32,7 +34,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,SharedPreferences.OnSharedPreferenceChangeListener{
 
-
+    RadioGroup rg;
     SharedPreferences prefs;
     View mainview;
     @Override
@@ -54,22 +56,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        /*Intent intent = new Intent(this,displayReviewActivity.class);
-        this.startActivity(intent);*/
+        //retrieving the checked category
+        rg = (RadioGroup)findViewById(R.id.rg_category);
+        String value = ((RadioButton)findViewById(rg.getCheckedRadioButtonId()))
+                .getText().toString();
 
         EditText editText = (EditText)findViewById(R.id.textbox_review);
         String review = editText.getText().toString();
-        postReview(review);
+        postReview(review,value);
         editText.setText("");
     }
 
-    private void postReview(String review)
+    private void postReview(String review, String value)
     {
         String userName = prefs.getString("login_main","unknown");
+
            try
            {
                HttpClient client = new DefaultHttpClient();
-               HttpPost post = new HttpPost(" http://www.youcode.ca/Lab01Servlet");
+               HttpPost post = new HttpPost(" http://www.youcode.ca/?CATEGORY=" + value);
                List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
                postParameters.add(new BasicNameValuePair("DATA", review));
                postParameters.add(new BasicNameValuePair("LOGIN_NAME",userName));
