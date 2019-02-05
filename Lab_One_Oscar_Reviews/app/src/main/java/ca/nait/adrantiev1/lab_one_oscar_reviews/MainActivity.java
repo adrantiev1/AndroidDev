@@ -65,27 +65,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         //retrieving the checked category
         rg = (RadioGroup)findViewById(R.id.rg_category);
-        String value = ((RadioButton)findViewById(rg.getCheckedRadioButtonId()))
-                .getText().toString();
+        //int category = (RadioButton)findViewById(rg.getCheckedRadioButtonId());
+        ;
+        String category = null;
 
-        if (value == "Best Picture")
-            value = "film";
-        else if (value== "Best Actor")
-            value = "actor";
+
+        switch (rg.getCheckedRadioButtonId())
+        {
+            case R.id.radioBestPicture:
+            {
+                category = "film";
+                break;
+            }
+            case R.id.radioBestActor:
+            {
+                category = "actor";
+                break;
+            }
+            case R.id.radioBestActress:
+            {
+                category = "actress";
+                break;
+            }
+            case R.id.radioFilmEditing:
+            {
+                category = "editing";
+                break;
+            }
+            case R.id.radioVisualEffects:
+            {
+                category = "effects";
+                break;
+            }
+        }
 
 
         EditText review_text = (EditText)findViewById(R.id.textbox_review);
         String review = review_text.getText().toString();
 
-        EditText nominee_text = (EditText)findViewById(R.id.textbox_review);
+        EditText nominee_text = (EditText)findViewById(R.id.textbox_nominee);
         String nominee = nominee_text.getText().toString();
 
-        postReview(review,value,nominee);
+        postReview(review,category,nominee);
 
 
     }
 
-    private void postReview(String review, String value,String nominee)
+    private void postReview(String review, String category,String nominee)
     {
         String url = prefs.getString("url","http://www.youcode.ca/Lab01Servlet");
         String userName = prefs.getString("login_name","Anton");
@@ -100,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                postParameters.add(new BasicNameValuePair("REVIEW", review));
                postParameters.add(new BasicNameValuePair("REVIEWER",userName));
                postParameters.add(new BasicNameValuePair("NOMINEE",nominee));
-               postParameters.add(new BasicNameValuePair("CATEGORY",value));
+               postParameters.add(new BasicNameValuePair("CATEGORY",category));
                postParameters.add(new BasicNameValuePair("PASSWORD",pass));
 
                UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(postParameters);
