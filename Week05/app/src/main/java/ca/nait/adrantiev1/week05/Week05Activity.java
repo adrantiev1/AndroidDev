@@ -1,5 +1,6 @@
 package ca.nait.adrantiev1.week05;
 
+import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -88,10 +89,13 @@ public class Week05Activity extends AppCompatActivity implements View.OnClickLis
         {
             case R.id.menu_item_start_service:
             {
+                startService(new Intent(this,GetterService.class));
+
                 break;
             }
             case R.id.menu_item_stop_service:
             {
+                stopService(new Intent(this, GetterService.class));
                 break;
             }
         }
