@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class displayReviewActivity extends AppCompatActivity {
-    RadioGroup rg;
+    RadioGroup rg ;
 
 
 
@@ -40,18 +40,30 @@ public class displayReviewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_review);
 
-        /*rg = (RadioGroup)findViewById(R.id.rg_category);
-        String category = ((RadioButton)findViewById(rg.getCheckedRadioButtonId()))
-                .getText().toString();*/
-
-        String category = "";
-        displayReviews(category);
+        displayReviews();
 
 
     }
 
-    private void displayReviews(String category)
+    private void displayReviews()
     {
+        rg = (RadioGroup)findViewById(R.id.rg_category);
+        String rbName = ((RadioButton)findViewById(rg.getCheckedRadioButtonId()))
+                .getText().toString();
+
+
+        String category = "";
+
+
+
+        if (rbName.equals("Best Picture")){
+            category = "film";
+        }else if(rbName.equals("Best Actor")){
+            category = "actor";
+        }
+
+
+
         String[] keys = new String[]{"DATE","REVIEWER","CATEGORY","NOMINEE","REVIEW"};
         int[] ids = new int[]{R.id.custom_row_date,R.id.custom_row_user,R.id.custom_row_category,R.id.custom_row_nominee,R.id.custom_row_review};
         SimpleAdapter adapter = new SimpleAdapter(this,reviews,R.layout.custom_row_layout,keys,ids);
@@ -65,7 +77,7 @@ public class displayReviewActivity extends AppCompatActivity {
 
     private void populateList(String category)
     {
-        category = "film";
+
         BufferedReader in = null;
         try
         {
