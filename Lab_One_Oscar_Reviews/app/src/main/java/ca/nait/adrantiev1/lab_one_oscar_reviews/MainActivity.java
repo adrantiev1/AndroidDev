@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String nominee = nominee_text.getText().toString();
 
         postReview(review,getRbCategory(),nominee);
-        
+
         review_text.setText("");
         nominee_text.setText("");
 
