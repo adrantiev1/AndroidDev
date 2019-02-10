@@ -28,6 +28,8 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static android.R.attr.category;
+
 public class displayReviewActivity extends AppCompatActivity {
     RadioGroup rg ;
 
@@ -47,21 +49,23 @@ public class displayReviewActivity extends AppCompatActivity {
 
     private void displayReviews()
     {
-        rg = (RadioGroup)findViewById(R.id.rg_category);
+        /*rg = (RadioGroup)findViewById(R.id.rg_category);
         String rbName = ((RadioButton)findViewById(rg.getCheckedRadioButtonId()))
-                .getText().toString();
-
-
-        String category = "";
+                .getText().toString();*/
+        Bundle extras = getIntent().getExtras();
 
 
 
-        if (rbName.equals("Best Picture")){
+        String category = extras.getString("key");
+
+
+
+        /*if (rbName.equals("Best Picture")){
             category = "film";
         }else if(rbName.equals("Best Actor")){
             category = "actor";
         }
-
+*/
 
 
         String[] keys = new String[]{"DATE","REVIEWER","CATEGORY","NOMINEE","REVIEW"};
@@ -122,12 +126,12 @@ public class displayReviewActivity extends AppCompatActivity {
                 this.startActivity(intent);
                 break;
             }
-            case R.id.menu_item_view_reviews:
+            /*case R.id.menu_item_view_reviews:
             {
                 Intent intent = new Intent(this,displayReviewActivity.class);
                 this.startActivity(intent);
                 break;
-            }
+            }*/
         }
 
         return true;

@@ -32,6 +32,8 @@ import org.apache.http.message.BasicNameValuePair;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.R.attr.category;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,SharedPreferences.OnSharedPreferenceChangeListener{
 
@@ -61,8 +63,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mainview.setBackgroundColor(Color.parseColor(bgColor));
     }
 
-    @Override
-    public void onClick(View v) {
+
+    public String getRbCategory(){
         //retrieving the checked category
         rg = (RadioGroup)findViewById(R.id.rg_category);
         //int category = (RadioButton)findViewById(rg.getCheckedRadioButtonId());
@@ -97,7 +99,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 category = "effects";
                 break;
             }
+
         }
+        return category;
+    }
+    @Override
+    public void onClick(View v) {
+
 
 
         EditText review_text = (EditText)findViewById(R.id.textbox_review);
@@ -106,7 +114,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         EditText nominee_text = (EditText)findViewById(R.id.textbox_nominee);
         String nominee = nominee_text.getText().toString();
 
-        postReview(review,category,nominee);
+        postReview(review,getRbCategory(),nominee);
+        
+        review_text.setText("");
+        nominee_text.setText("");
+
 
 
     }
@@ -172,6 +184,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.menu_item_view_reviews:
             {
                 Intent intent = new Intent(this,displayReviewActivity.class);
+                intent.putExtra("key",getRbCategory());
                 this.startActivity(intent);
                 break;
             }

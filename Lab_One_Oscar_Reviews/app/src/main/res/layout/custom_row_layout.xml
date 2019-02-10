@@ -9,22 +9,21 @@
         android:id="@+id/custom_row_user"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:textSize="12dp"
+        android:textSize="18dp"
         android:textStyle="bold"
         android:textColor="#ef1affdd"
         android:text="user"
-        />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
     <TextView
         android:id="@+id/custom_row_date"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:textSize="12dp"
+        android:textSize="18dp"
         android:textStyle="italic"
-        android:textColor="#ef1aaaff"
+        android:textColor="#ef1affdd"
         android:typeface="sans"
         android:text="date"
         />
@@ -33,31 +32,38 @@
         android:id="@+id/custom_row_category"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignParentRight="@id/custom_row_date"
-        android:textSize="12dp"
+        android:textSize="18dp"
         android:textStyle="bold"
         android:textColor="#ef1affdd"
         android:text="category"
-        />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
     <TextView
         android:id="@+id/custom_row_nominee"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:textSize="14dp"
+        android:textSize="18dp"
         android:textStyle="bold"
-        android:layout_below="@id/custom_row_user"
         android:textColor="#ef1a6677"
         android:text="nominee"
-        />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="52dp" />
     <TextView
         android:id="@+id/custom_row_review"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:textSize="14dp"
         android:textStyle="bold"
-        android:layout_below="@id/custom_row_nominee"
         android:textColor="#ef1a6677"
         android:text="review"
 
-        />
+        android:layout_marginTop="87dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>
