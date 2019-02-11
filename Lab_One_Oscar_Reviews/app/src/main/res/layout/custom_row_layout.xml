@@ -12,7 +12,7 @@
         android:textSize="18dp"
         android:textStyle="bold"
         android:textColor="#ef1affdd"
-        android:text="user"
+
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
     <TextView
@@ -25,7 +25,7 @@
         android:textStyle="italic"
         android:textColor="#ef1affdd"
         android:typeface="sans"
-        android:text="date"
+
         />
 
     <TextView
@@ -35,7 +35,6 @@
         android:textSize="18dp"
         android:textStyle="bold"
         android:textColor="#ef1affdd"
-        android:text="category"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -46,11 +45,10 @@
         android:textSize="18dp"
         android:textStyle="bold"
         android:textColor="#ef1a6677"
-        android:text="nominee"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="52dp" />
+        android:layout_marginTop="36dp" />
     <TextView
         android:id="@+id/custom_row_review"
         android:layout_width="wrap_content"
@@ -58,7 +56,7 @@
         android:textSize="14dp"
         android:textStyle="bold"
         android:textColor="#ef1a6677"
-        android:text="review"
+
 
         android:layout_marginTop="87dp"
         android:layout_alignParentTop="true"

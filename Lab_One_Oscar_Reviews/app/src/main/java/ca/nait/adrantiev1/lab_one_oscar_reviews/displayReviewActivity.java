@@ -49,23 +49,12 @@ public class displayReviewActivity extends AppCompatActivity {
 
     private void displayReviews()
     {
-        /*rg = (RadioGroup)findViewById(R.id.rg_category);
-        String rbName = ((RadioButton)findViewById(rg.getCheckedRadioButtonId()))
-                .getText().toString();*/
+
         Bundle extras = getIntent().getExtras();
-
-
 
         String category = extras.getString("key");
 
 
-
-        /*if (rbName.equals("Best Picture")){
-            category = "film";
-        }else if(rbName.equals("Best Actor")){
-            category = "actor";
-        }
-*/
 
 
         String[] keys = new String[]{"DATE","REVIEWER","CATEGORY","NOMINEE","REVIEW"};

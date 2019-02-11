@@ -106,8 +106,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
-
-
         EditText review_text = (EditText)findViewById(R.id.textbox_review);
         String review = review_text.getText().toString();
 
@@ -132,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
            try
            {
                HttpClient client = new DefaultHttpClient();
-               HttpPost post = new HttpPost("http://www.youcode.ca/Lab01Servlet");
+               HttpPost post = new HttpPost(url);
                List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
 
                postParameters.add(new BasicNameValuePair("REVIEW", review));

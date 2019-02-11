@@ -98,6 +98,11 @@ public class Week05Activity extends AppCompatActivity implements View.OnClickLis
                 stopService(new Intent(this, GetterService.class));
                 break;
             }
+            case R.id.menu_item_view_chatter:
+            {
+                startActivity(new Intent(this, ViewChatterActivity.class));
+                break;
+            }
         }
         return true;
     }
