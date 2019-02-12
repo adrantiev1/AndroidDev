@@ -103,6 +103,11 @@ public class Week05Activity extends AppCompatActivity implements View.OnClickLis
                 startActivity(new Intent(this, ViewChatterActivity.class));
                 break;
             }
+            case R.id.menu_item_list_chatter:
+            {
+                startActivity(new Intent(this, ChatterListActivity.class));
+                break;
+            }
         }
         return true;
     }

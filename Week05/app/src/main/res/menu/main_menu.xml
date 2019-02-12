@@ -6,4 +6,6 @@
         android:title="Stop Service"/>
     <item android:id="@+id/menu_item_view_chatter"
         android:title="View Chatter"/>
+    <item android:id="@+id/menu_item_list_chatter"
+        android:title="Chatter Listview"/>
 </menu>
