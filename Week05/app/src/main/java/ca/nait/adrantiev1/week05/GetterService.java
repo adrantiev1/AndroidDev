@@ -32,7 +32,7 @@ import java.util.List;
 
 public class GetterService extends Service
 {
-    boolean bRun = false;
+    public static boolean bRun = false;
     //final = const
     static final String TAG = "GetterService";
     static final int DELAY = 10000;

@@ -22,7 +22,8 @@
         <service android:name=".GetterService" />
 
         <activity android:name=".ViewChatterActivity" />
-        <activity android:name=".ChatterListActivity"></activity>
+        <activity android:name=".ChatterListActivity" />
+        <activity android:name=".BaseActivity"></activity>
     </application>
 
 </manifest>

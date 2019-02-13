@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
-public class ChatterListActivity extends AppCompatActivity
+public class ChatterListActivity extends BaseActivity
 {
     ListViewAdapter adapter;
     ListView listView;
@@ -22,6 +22,7 @@ public class ChatterListActivity extends AppCompatActivity
         listView = (ListView)findViewById(R.id.lv_chatter);
         dbManager = new DBManager(this);
         database = dbManager.getReadableDatabase();
+
 
     }
 

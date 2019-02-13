@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
-public class ViewChatterActivity extends AppCompatActivity {
+public class ViewChatterActivity extends BaseActivity {
 
     static  final  String TAG = "ViewChatterActivity";
     DBManager manager;
@@ -23,6 +23,7 @@ public class ViewChatterActivity extends AppCompatActivity {
         manager = new DBManager(this);
         database = manager.getReadableDatabase();
         tvChatter = (TextView)findViewById(R.id.tv_chat);
+
 
     }
 

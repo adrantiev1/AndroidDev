@@ -23,7 +23,7 @@ import org.apache.http.message.BasicNameValuePair;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Week05Activity extends AppCompatActivity implements View.OnClickListener {
+public class Week05Activity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "Week05Activity";
 
@@ -82,41 +82,5 @@ public class Week05Activity extends AppCompatActivity implements View.OnClickLis
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
-            case R.id.menu_item_start_service:
-            {
-                startService(new Intent(this,GetterService.class));
 
-                break;
-            }
-            case R.id.menu_item_stop_service:
-            {
-                stopService(new Intent(this, GetterService.class));
-                break;
-            }
-            case R.id.menu_item_view_chatter:
-            {
-                startActivity(new Intent(this, ViewChatterActivity.class));
-                break;
-            }
-            case R.id.menu_item_list_chatter:
-            {
-                startActivity(new Intent(this, ChatterListActivity.class));
-                break;
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        MenuInflater inflator = this.getMenuInflater();
-        inflator.inflate(R.menu.main_menu,menu);
-        return true;
-    }
 }
