@@ -35,6 +35,7 @@ public class GetterService extends Service
     public static boolean bRun = false;
     //final = const
     static final String TAG = "GetterService";
+    public static final  String NEW_MESSAGE =   "New message";
     static final int DELAY = 10000;
     MyThread theThread = null;
 
@@ -63,6 +64,12 @@ public class GetterService extends Service
                 try
                 {
                     Log.d(TAG,"while loop cycle once");
+                    if (getChatter() == true)
+                    {
+                        Intent broadcast = new Intent(NEW_MESSAGE);
+                        sendBroadcast(broadcast);
+                        Log.d(TAG, "intent sent");
+                    }
                     getChatter();
                     Thread.sleep(DELAY);
                 }
@@ -103,8 +110,10 @@ public class GetterService extends Service
         return START_STICKY;
     }
 
-    private  void  getChatter()
+    private  boolean  getChatter()
     {
+        boolean bNew = false;
+
         BufferedReader in = null;
         try
         {
@@ -136,6 +145,7 @@ public class GetterService extends Service
                 {
                     database.insertOrThrow(DBManager.TABLE_NAME,null,values);
                     Log.d(TAG,"record inserted");
+                    bNew = true;
                 }
                 catch (SQLException sqle)
                 {
@@ -152,5 +162,6 @@ public class GetterService extends Service
         {
             Log.d(TAG,"read failed => " + e);
         }
+        return bNew;
     }
 }
