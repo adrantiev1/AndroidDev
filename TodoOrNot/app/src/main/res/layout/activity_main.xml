@@ -43,4 +43,15 @@
         android:elevation="0dp"
         android:text="Send Data"
         android:textSize="15sp" />
+    <Button
+        android:id="@+id/button_view_list"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5sp"
+        android:layout_marginLeft="5sp"
+        android:layout_marginRight="5sp"
+        android:layout_marginTop="5sp"
+        android:elevation="0dp"
+        android:text="View Data"
+        android:textSize="15sp" />
 </LinearLayout>

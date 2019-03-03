@@ -1,5 +1,7 @@
 package com.example.anton.todoornot;
 
+import android.content.Intent;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,9 +27,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //nice to have in case something went wrong
+        if (android.os.Build.VERSION.SDK_INT > 9)
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
          
         Button sendButton = (Button)findViewById(R.id.button_send_to_list);
         sendButton.setOnClickListener(this);
+        Button viewButton = (Button)findViewById(R.id.button_view_list);
+        viewButton.setOnClickListener(this);
+
         myDbHelper = new DBManager(this);
 
         Log.d(TAG, "onCreate() called");
@@ -44,20 +56,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             {
                 EditText title = (EditText)findViewById(R.id.textbox_list_name);
                 EditText content = (EditText)findViewById(R.id.textbox_content);
-                String message = "Test Message";
-                String messageTitle = "Test title";
+                String message = title.getText().toString();
+                String messageTitle = content.getText().toString();
                 String newDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
                 String flag = "Y";
                 if (message.length() != 0 || messageTitle.length() != 0)
                 {
                     AddData(messageTitle,message,newDate,flag);
-//                    title.setText("");
-//                    content.setText("");
+                    title.setText("");
+                    content.setText("");
 
                 }else {
                     toastMessage("You must put something in the fields");
                 }
 
+            }
+            case R.id.button_view_list:
+            {
+                startActivity(new Intent(this,ToDoListActivity.class));
+                break;
             }
 
         }

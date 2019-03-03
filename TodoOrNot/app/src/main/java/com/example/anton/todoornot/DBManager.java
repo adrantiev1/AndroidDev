@@ -2,6 +2,7 @@ package com.example.anton.todoornot;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
@@ -19,11 +20,11 @@ public class DBManager extends SQLiteOpenHelper
     static final String DB_NAME = "TodoOrNot.db";
     static final int DB_VERSION = 1;
     static final String TABLE = "Active";
-    static final String C_ID = BaseColumns._ID;
-    static final String C_TITLE = "title";
-    static final String C_DESC = "description";
-    static final String C_DATE = "postDate";
-    static final String C_FLAG = "flag";
+    static final String C_ID = "ID";
+    static final String C1_TITLE = "title";
+    static final String C2_DESC = "description";
+    static final String C3_DATE = "postDate";
+    static final String C4_FLAG = "flag";
 
     public DBManager(Context context)
     {
@@ -34,8 +35,8 @@ public class DBManager extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        String sql = "create table " + TABLE + " (" + C_ID + " int primary key, "
-                + C_TITLE + " text, " + C_DESC + " text, " + C_DATE + " text, " + C_FLAG + " text)";
+        String sql = "create table " + TABLE + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + C1_TITLE + " text, " + C2_DESC + " text, " + C3_DATE + " text, " + C4_FLAG + " text)";
 
         Log.d(TAG,sql);
 
@@ -52,10 +53,10 @@ public class DBManager extends SQLiteOpenHelper
     public boolean addData(String title,String desc,String date,String flag){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(C_TITLE,title);
-        contentValues.put(C_DESC,desc);
-        contentValues.put(C_DATE,date);
-        contentValues.put(C_FLAG,flag);
+        contentValues.put(C1_TITLE,title);
+        contentValues.put(C2_DESC,desc);
+        contentValues.put(C3_DATE,date);
+        contentValues.put(C4_FLAG,flag);
 
 
         Log.d(TAG,"addData: Adding " + title + " " + desc + "to" + TABLE);
@@ -66,5 +67,13 @@ public class DBManager extends SQLiteOpenHelper
         }else {
             return true;
         }
+    }
+    //return all data
+    public Cursor getData()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE;
+        Cursor data = db.rawQuery(query,null);
+        return data;
     }
 }

@@ -1,4 +1,4 @@
-/*
+
 package com.example.anton.todoornot;
 
 import android.app.Service;
@@ -6,10 +6,10 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
-*/
+
 /**
  * Created by anton on 2/25/2019.
- *//*
+ */
 
 
 public class GetterService extends Service {
@@ -30,4 +30,4 @@ public class GetterService extends Service {
 
     }
 }
-*/
+
