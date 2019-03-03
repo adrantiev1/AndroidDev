@@ -15,6 +15,7 @@ public class DBManager extends SQLiteOpenHelper
 {
 
     static final String TAG = "DBManager";
+
     static final String DB_NAME = "TodoOrNot.db";
     static final int DB_VERSION = 1;
     static final String TABLE = "Active";
@@ -28,6 +29,7 @@ public class DBManager extends SQLiteOpenHelper
     {
         super(context, DB_NAME, null, DB_VERSION);
     }
+
 
     @Override
     public void onCreate(SQLiteDatabase db)
