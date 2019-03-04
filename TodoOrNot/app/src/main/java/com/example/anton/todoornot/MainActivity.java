@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }else {
                     toastMessage("You must put something in the fields");
                 }
+                break;
 
             }
             case R.id.button_view_list:
