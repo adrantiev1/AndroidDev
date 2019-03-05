@@ -19,12 +19,19 @@ public class DBManager extends SQLiteOpenHelper
 
     static final String DB_NAME = "TodoOrNot.db";
     static final int DB_VERSION = 1;
-    static final String TABLE = "Active";
+
+//Table one for titles
+    static final String TABLE = "Title";
     static final String C_ID = "ID";
     static final String C1_TITLE = "title";
-    static final String C2_DESC = "description";
-    static final String C3_DATE = "postDate";
-    static final String C4_FLAG = "flag";
+
+
+//Table two for title details
+    static final String TABLE_DETAILS = "TitleDetail";
+    static final String C1_DESC = "description";
+    static final String C2_DATE = "date";
+    static final String C3_FLAG = "titleId";
+    static final String C4_COMPLETE = "completed";
 
     public DBManager(Context context)
     {
@@ -35,9 +42,12 @@ public class DBManager extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        String sql = "create table " + TABLE + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + C1_TITLE + " text, " + C2_DESC + " text, " + C3_DATE + " text, " + C4_FLAG + " text)";
+        String sql = "create table " + TABLE + " (" + C_ID +  " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + C1_TITLE +  " text)";
 
+
+//        String sql = "create table " + TABLE + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, "
+//                + C1_TITLE + " text, " + C2_DESC + " text, " + C3_DATE + " text, " + C4_FLAG + " text)";
         Log.d(TAG,sql);
 
         db.execSQL(sql);
@@ -50,16 +60,14 @@ public class DBManager extends SQLiteOpenHelper
         Log.d(TAG, "onUpdated");
         onCreate(db);
     }
-    public boolean addData(String title,String desc,String date,String flag){
+    public boolean addData(String title){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(C1_TITLE,title);
-        contentValues.put(C2_DESC,desc);
-        contentValues.put(C3_DATE,date);
-        contentValues.put(C4_FLAG,flag);
 
 
-        Log.d(TAG,"addData: Adding " + title + " " + desc + "to" + TABLE);
+
+        Log.d(TAG,"addData: Adding " + title +  "to" + TABLE);
 
         long result = db.insert(TABLE,null,contentValues);
         if (result == -1){

@@ -54,4 +54,10 @@
         android:elevation="0dp"
         android:text="View Data"
         android:textSize="15sp" />
+    <Spinner
+        android:id="@+id/title_spinner"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:textSize="8sp"
+        android:background="#33aa11"></Spinner>
 </LinearLayout>

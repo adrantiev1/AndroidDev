@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#fff"
-        android:divider="#ff0"
+        android:divider="#5ae"
         android:dividerHeight="3sp"
         android:drawSelectorOnTop="false"
         android:textSize="32sp"

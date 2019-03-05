@@ -20,6 +20,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = "ToDoList_MainActivity";
     DBManager myDbHelper;
 
+//usecase on populate title table
+// usecase retribve titles into an array
+// populate drop down with titles
 
 
     @Override
@@ -56,13 +59,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             {
                 EditText title = (EditText)findViewById(R.id.textbox_list_name);
                 EditText content = (EditText)findViewById(R.id.textbox_content);
-                String message = title.getText().toString();
-                String messageTitle = content.getText().toString();
-                String newDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-                String flag = "Y";
-                if (message.length() != 0 || messageTitle.length() != 0)
+                String messageTitle = title.getText().toString();
+//                String messageCOntent = content.getText().toString();
+//                String newDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+//                String flag = "Y";
+                if ( messageTitle.length() != 0)
                 {
-                    AddData(messageTitle,message,newDate,flag);
+                    AddData(messageTitle);
                     title.setText("");
                     content.setText("");
 
@@ -81,9 +84,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-    public void AddData(String newTitle,String newDesc,String newDate,String newFlag)
+    public void AddData(String newTitle)
     {
-        boolean insertData = myDbHelper.addData(newTitle,newDesc,newDate,newFlag);
+        boolean insertData = myDbHelper.addData(newTitle);
         if (insertData){
             toastMessage("Data Successfuly Inserted");
         }else {

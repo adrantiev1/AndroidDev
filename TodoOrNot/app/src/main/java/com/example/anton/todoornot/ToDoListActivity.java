@@ -29,8 +29,8 @@ public class ToDoListActivity extends AppCompatActivity {
         myDbHelper = new DBManager(this);
 
 
-        String[] keys = new String[]{"sender","date","message"};
-        int[] ids = new int[]{R.id.sender,R.id.date,R.id.message};
+        String[] keys = new String[]{"title"};
+        int[] ids = new int[]{R.id.tv_title};
         SimpleAdapter adapter = new SimpleAdapter(this,todo,R.layout.listview_row,keys,ids);
 
         populateListView();
@@ -43,16 +43,16 @@ public class ToDoListActivity extends AppCompatActivity {
         Log.d(TAG,"populateListView: Displaying data in the Listview");
 
         Cursor data =myDbHelper.getData();
-        ArrayList<String> listData = new ArrayList<>();
+//        ArrayList<String> listData = new ArrayList<>();
 
         String field = null;
         while (data.moveToNext()){
 
             HashMap<String,String> temp = new HashMap<String, String>();
 
-            temp.put("sender",data.getString(1));
-            temp.put("date",data.getString(2));
-            temp.put("message",data.getString(3));
+            temp.put("title",data.getString(1));
+//            temp.put("date",data.getString(2));
+//            temp.put("message",data.getString(3));
 //            listData.add(data.getString(1));
 //            listData.add(data.getString(2));
 //            listData.add(data.getString(3));
