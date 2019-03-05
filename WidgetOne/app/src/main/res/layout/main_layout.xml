@@ -10,7 +10,14 @@
         <!--android:layout_gravity="center_horizontal|center_vertical"-->
         <!--android:text="YahooYa"-->
         <!--android:textColor="#000"/>-->
-    <AnalogClock
+
+    <TextView
+        android:id="@+id/text_view_wifi_state"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="#900"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="Wifi"
+        android:textColor="#000"/>
+
 </LinearLayout>
