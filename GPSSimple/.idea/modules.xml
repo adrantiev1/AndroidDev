@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TodoOrNot.iml" filepath="$PROJECT_DIR$/TodoOrNot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GPSSimple.iml" filepath="$PROJECT_DIR$/GPSSimple.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
