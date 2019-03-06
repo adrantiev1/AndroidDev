@@ -8,6 +8,9 @@ import android.widget.Spinner;
 
 public class ToDoTitleSpinnerActivity extends AppCompatActivity {
 
+
+    private Spinner spinner;
+    private SpinAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
