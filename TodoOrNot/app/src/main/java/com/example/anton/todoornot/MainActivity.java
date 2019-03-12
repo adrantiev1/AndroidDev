@@ -1,6 +1,7 @@
 package com.example.anton.todoornot;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,10 +9,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener
@@ -19,6 +23,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final String TAG = "ToDoList_MainActivity";
     DBManager myDbHelper;
+
+    private Spinner mySpinner;
+    private SpinerAdapter adapter;
 
 //usecase on populate title table
 // usecase retribve titles into an array
@@ -37,6 +44,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+
+        //for spinner
+        ArrayList titles = new ArrayList();
+        populateTitles(titles);
+        adapter = new SpinerAdapter(this, android.R.layout.simple_spinner_item,
+                titles);
+        mySpinner = (Spinner) findViewById(R.id.todo_title_spinner);
+        mySpinner.setAdapter(adapter);
+//        mySpinner.setOnItemSelectedListener(new MyItemListener(this));
+
+        //spinner done
          
         Button sendButton = (Button)findViewById(R.id.button_send_to_list);
         sendButton.setOnClickListener(this);
@@ -48,6 +66,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d(TAG, "onCreate() called");
     }
 
+    private void populateTitles(ArrayList titles) {
+
+        Log.d(TAG,"populateListView: Displaying data in the Listview");
+
+        Cursor data =myDbHelper.getData();
+
+
+        String field = null;
+        while (data.moveToNext()){
+
+//            HashMap<String,String> temp = new HashMap<String, String>();
+            ArrayList<String> tempData = new ArrayList<>();
+
+            tempData.add(data.getString(1));
+//            temp.put("date",data.getString(2));
+//            temp.put("message",data.getString(3));
+//            listData.add(data.getString(1));
+//            listData.add(data.getString(2));
+//            listData.add(data.getString(3));
+            titles.add(tempData);
+        }
+    }
 
 
     @Override
