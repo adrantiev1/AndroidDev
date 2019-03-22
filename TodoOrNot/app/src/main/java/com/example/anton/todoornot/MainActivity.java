@@ -2,6 +2,7 @@ package com.example.anton.todoornot;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,12 +29,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Spinner mySpinner;
     private TitleSpinerAdapter adapter;
-    static ArrayList<Todo> todos;
     ListView listView;
+
+    static ArrayList<Todo> todos;
+    static ArrayList<TodoDetail> todoDetails;
+
+
     Cursor cursor;
+    static SQLiteDatabase database;
 
 
     static int currentListIndex = 0;
+    static int currentItemIndex = 0;
 
 //usecase on populate title table
 // usecase retribve titles into an array
@@ -54,10 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         //for spinner
-        ArrayList titles = new ArrayList();
-        populateTitles(titles);
-        adapter = new TitleSpinerAdapter(this, android.R.layout.simple_spinner_item,
-                titles);
+
 
         mySpinner = (Spinner) findViewById(R.id.todo_title_spinner);
         ///mySpinner.setAdapter(adapter);
@@ -70,36 +74,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button viewButton = (Button)findViewById(R.id.button_view_list);
         viewButton.setOnClickListener(this);
 
+
+        listView = (ListView)findViewById(R.id.listview_todo_details) ;
+        listView.setOnItemClickListener(this);
+
         myDbHelper = new DBManager(this);
         todos = new ArrayList<Todo>();
         //refreshSpinner();
-        refreshListView();
+        //refreshListView();
 
         Log.d(TAG, "onCreate() called");
     }
 
-    private void populateTitles(ArrayList titles) {
+    private void refreshSpinner() {
+        populateTitlesArray();
+        adapter = new TitleSpinerAdapter(this,R.layout.custom_spinner_row,todos);
+        mySpinner.setAdapter(adapter);
 
-        Log.d(TAG,"populateListView: Displaying data in the Listview");
-
-        Cursor data =myDbHelper.getData();
-
-
-        String field = null;
-        while (data.moveToNext()){
-
-//            HashMap<String,String> temp = new HashMap<String, String>();
-            ArrayList<String> tempData = new ArrayList<>();
-
-            tempData.add(data.getString(1));
-//            temp.put("date",data.getString(2));
-//            temp.put("message",data.getString(3));
-//            listData.add(data.getString(1));
-//            listData.add(data.getString(2));
-//            listData.add(data.getString(3));
-            titles.add(tempData);
-        }
     }
+
 
 
     @Override
@@ -117,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                String flag = "Y";
                 if ( messageTitle.length() != 0)
                 {
-                    AddData(messageTitle);
+                    //AddData(messageTitle);
                     title.setText("");
                     content.setText("");
 
@@ -127,24 +120,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             }
-            case R.id.button_view_list:
-            {
-                startActivity(new Intent(this,ToDoListActivity.class));
-                break;
-            }
+
 
         }
 
     }
-    public void AddData(String newTitle)
-    {
-        boolean insertData = myDbHelper.addData(newTitle);
-        if (insertData){
-            toastMessage("Data Successfuly Inserted");
-        }else {
-            toastMessage("Something went wrong");
-        }
-    }
+
 
     private void toastMessage(String message)
     {
@@ -153,7 +134,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        currentItemIndex = position;
+        Toast.makeText(this,todoDetails.get(position).getContent(),Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -171,9 +153,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private Cursor populateTitlesArray() {
-        todos = new ArrayList<Todo>();
+        todoDetails = new ArrayList<TodoDetail>();
+        database = myDbHelper.getReadableDatabase();
+        String whereClause = DBManager.C1_TITLE_ID + "=" + (todos.get(currentListIndex).getId());
+
+        cursor = database.query(DBManager.TABLE_DETAILS,null,whereClause,null,null,null,null);
+        startManagingCursor(cursor);
+        String content, output;
+        int id, titleId;
+        //boolean bcompleted;
+
+        while (cursor.moveToNext()){
+            id = cursor.getInt(cursor.getColumnIndex(DBManager.C_ID));
+            titleId = cursor.getInt(cursor.getColumnIndex(DBManager.C1_TITLE_ID));
+            content = cursor.getString(cursor.getColumnIndex(DBManager.C2_CONTENT));
 
 
+            TodoDetail item = new TodoDetail(id,titleId,content);
+            todoDetails.add(item);
+        }
+
+
+        return cursor;
 
     }
 

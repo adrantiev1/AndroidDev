@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class TitleSpinerAdapter  extends ArrayAdapter{
     private Context context;
-    private ArrayList listTitles;
+    private ArrayList todos;
 
 
 
@@ -29,17 +29,17 @@ public class TitleSpinerAdapter  extends ArrayAdapter{
     {
         super(context, textViewResourceId, objects);
         this.context = context;
-        this.listTitles = objects;
+        this.todos = objects;
     }
 
     public int getCount()
     {
-        return listTitles.size();
+        return todos.size();
     }
 
     public Todo getItem(int pos)
     {
-        return (Todo) listTitles.get(pos);
+        return (Todo) todos.get(pos);
     }
 
 

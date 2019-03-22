@@ -69,5 +69,13 @@
         android:textColor="#CCFFFF00"
         android:textSize="12sp"
         android:textStyle="bold" />
+    <ListView
+        android:id="@+id/listview_todo_details"
+        android:choiceMode="singleChoice"
+        android:listSelector="#99cccc"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_margin="20dp"
+        android:background="#cacaca" />
 
 </LinearLayout>
