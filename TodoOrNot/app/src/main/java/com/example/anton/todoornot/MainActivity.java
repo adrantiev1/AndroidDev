@@ -7,8 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -18,14 +20,20 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener
+public class MainActivity extends AppCompatActivity implements View.OnClickListener ,AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener
 {
 
     private static final String TAG = "ToDoList_MainActivity";
     DBManager myDbHelper;
 
     private Spinner mySpinner;
-    private SpinerAdapter adapter;
+    private TitleSpinerAdapter adapter;
+    static ArrayList<Todo> todos;
+    ListView listView;
+    Cursor cursor;
+
+
+    static int currentListIndex = 0;
 
 //usecase on populate title table
 // usecase retribve titles into an array
@@ -48,11 +56,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //for spinner
         ArrayList titles = new ArrayList();
         populateTitles(titles);
-        adapter = new SpinerAdapter(this, android.R.layout.simple_spinner_item,
+        adapter = new TitleSpinerAdapter(this, android.R.layout.simple_spinner_item,
                 titles);
+
         mySpinner = (Spinner) findViewById(R.id.todo_title_spinner);
-        mySpinner.setAdapter(adapter);
-//        mySpinner.setOnItemSelectedListener(new MyItemListener(this));
+        ///mySpinner.setAdapter(adapter);
+        mySpinner.setOnItemSelectedListener(this);
 
         //spinner done
          
@@ -62,6 +71,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         viewButton.setOnClickListener(this);
 
         myDbHelper = new DBManager(this);
+        todos = new ArrayList<Todo>();
+        //refreshSpinner();
+        refreshListView();
 
         Log.d(TAG, "onCreate() called");
     }
@@ -137,5 +149,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void toastMessage(String message)
     {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Todo todo = (Todo) parent.getAdapter().getItem(position);
+        currentListIndex = position;
+        refreshListView();
+    }
+
+    private void refreshListView() {
+        if(todos!= null && todos.size() > 0)
+            cursor = populateTitlesArray();
+        CursorAdapter adapter = new CursorAdapter(this, cursor);
+        listView.setAdapter(adapter);
+    }
+
+    private Cursor populateTitlesArray() {
+        todos = new ArrayList<Todo>();
+
+
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

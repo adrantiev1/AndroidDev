@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="youcode.ca.cashregister.MainActivity">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edittext_customer_name"
+                    android:layout_width="250sp"
+                    android:layout_height="32sp"
+                    android:hint="Type new customer name here"
+                    android:background="#cacaca"/>
+
+                <Button
+                    android:id="@+id/button_save_customer_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@id/edittext_customer_name"
+                    android:text="Save"
+                    android:textAllCaps="false"
+                    android:textSize="18sp"
+                    android:textStyle="normal"/>
+        </RelativeLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Select Customer... "
+            android:textColor="#222222"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/spinner_receipt"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:dropDownWidth="300dp"
+            android:prompt="@string/spinner_prompt" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edittext_detail_description"
+                    android:layout_width="150sp"
+                    android:layout_height="32sp"
+                    android:layout_alignParentTop="true"
+                    android:hint="Description"
+                    android:layout_marginRight="5dp"
+                    android:background="#cacaca"/>
+                <EditText
+                    android:id="@+id/edittext_detail_price"
+                    android:layout_width="100dp"
+                    android:layout_height="32sp"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@id/edittext_detail_description"
+                    android:hint="Price"
+                    android:background="#cacaca"/>
+
+                <Button
+                    android:id="@+id/button_save_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@id/edittext_detail_price"
+                    android:text="Save"
+                    android:textAllCaps="false"
+                    android:textSize="18sp"
+                    android:textStyle="normal"/>
+        </RelativeLayout>
+
+
+
+        <ListView
+            android:id="@+id/listview_receipt_details"
+            android:choiceMode="singleChoice"
+            android:listSelector="#99cccc"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_margin="20dp"
+            android:background="#cacaca" />
+
+</LinearLayout>

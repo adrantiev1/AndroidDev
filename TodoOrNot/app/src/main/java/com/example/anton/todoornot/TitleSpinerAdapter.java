@@ -11,22 +11,27 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 
 /**
  * Created by adrantiev1 on 3/12/2019.
  */
 
-public class SpinerAdapter  extends ArrayAdapter{
+public class TitleSpinerAdapter  extends ArrayAdapter{
     private Context context;
     private ArrayList listTitles;
 
-    public SpinerAdapter(Context context, int textViewResourceId, ArrayList objects)
+
+
+
+    public TitleSpinerAdapter(Context context, int textViewResourceId, ArrayList objects)
     {
         super(context, textViewResourceId, objects);
         this.context = context;
         this.listTitles = objects;
     }
+
     public int getCount()
     {
         return listTitles.size();
@@ -44,8 +49,10 @@ public class SpinerAdapter  extends ArrayAdapter{
 
         TextView label = new TextView(context);
 
-        label.setTextColor(Color.BLACK);
-        label.setText(((Todo) (listTitles.get(position))).getTodoTitle());
+        label.setTextColor(Color.BLUE);
+        label.setTextSize(20);
+         Todo todo = getItem(position);
+        label.setText(todo.getTodoTitle());
         return label;
     }
     // called when the dropdown opens
@@ -57,9 +64,9 @@ public class SpinerAdapter  extends ArrayAdapter{
 
 
 
-        TextView title = (TextView)spinnerRow.findViewById(R.id.textview_todo_title);
-        String str = ((Todo) (listTitles.get(position))).getTodoTitle();
-        title.setText(str);
+        TextView tvTitle = (TextView)spinnerRow.findViewById(R.id.textview_todo_title);
+        Todo todo = getItem(position);
+        tvTitle.setText(todo.getTodoTitle());
 
         return spinnerRow;
     }
