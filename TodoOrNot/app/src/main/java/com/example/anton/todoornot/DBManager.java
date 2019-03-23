@@ -1,8 +1,7 @@
 package com.example.anton.todoornot;
 
-import android.content.ContentValues;
+
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
@@ -17,11 +16,11 @@ public class DBManager extends SQLiteOpenHelper {
     static final String TAG = "DBManager";
 
     static final String DB_NAME = "TodoOrNot.db";
-    static final int DB_VERSION = 1;
+    static final int DB_VERSION = 2;
 
     //Table one for titles
     static final String TABLE_TITLES = "Title";
-    static final String C_ID = "ID";
+    static final String C_ID = BaseColumns._ID;
     static final String C1_TITLE = "title";
 
 
@@ -48,7 +47,7 @@ public class DBManager extends SQLiteOpenHelper {
 //            + C1_TITLE_ID + " text, " + C2_CONTENT + " text, " + C3_DATE + " text, " + C4_COMPLETED_FLAG + " text)";
 
         sql = "create table " + TABLE_DETAILS + " (" + C_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + C1_TITLE_ID + " text, " + C2_CONTENT + " text, " + C4_COMPLETED_FLAG + " text)";
+                + C1_TITLE_ID + " integer, " + C2_CONTENT + " text, " + C4_COMPLETED_FLAG + " text)";
         Log.d(TAG, sql);
         db.execSQL(sql);
     }

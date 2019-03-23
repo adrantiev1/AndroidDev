@@ -12,8 +12,10 @@ import android.widget.SimpleCursorAdapter;
 public class CursorAdapter extends SimpleCursorAdapter {
 
     static final String TAG = "CursorAdapter";
-    static final String[] FROM = {DBManager.C_ID, DBManager.C1_TITLE_ID, DBManager.C2_CONTENT, DBManager.C1_TITLE};
-    static final int[] TO = {R.id.tv_title_id, R.id.tv_content_id, R.id.tv_content, R.id.tv_title};
+//    static final String[] FROM = {DBManager.C_ID, DBManager.C1_TITLE_ID, DBManager.C2_CONTENT};
+//    static final int[] TO = {R.id.tv_title_id, R.id.tv_detail_id, R.id.tv_content};
+    static final String[] FROM = {DBManager.C2_CONTENT};
+    static final int[] TO = {R.id.tv_content};
 
 
     public CursorAdapter(Context context, Cursor c) {

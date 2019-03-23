@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    tools:context="com.example.anton.todoornot.MainActivity">
 
     <TextView
         android:layout_height="wrap_content"
@@ -16,7 +18,7 @@
     <EditText
         android:id="@+id/textbox_list_name"
         android:layout_width="fill_parent"
-        android:layout_height="78dp"
+        android:layout_height="46dp"
         android:layout_marginLeft="5sp"
         android:layout_marginRight="5sp"
         android:layout_marginTop="5sp"
@@ -25,7 +27,7 @@
     <EditText
         android:id="@+id/textbox_content"
         android:layout_width="fill_parent"
-        android:layout_height="78dp"
+        android:layout_height="48dp"
         android:layout_marginLeft="5sp"
         android:layout_marginRight="5sp"
         android:layout_marginTop="5sp"
@@ -41,10 +43,10 @@
         android:layout_marginRight="5sp"
         android:layout_marginTop="5sp"
         android:elevation="0dp"
-        android:text="Send Data"
+        android:text="Save Title"
         android:textSize="15sp" />
     <Button
-        android:id="@+id/button_view_list"
+        android:id="@+id/button_save_content"
         android:layout_width="195dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5sp"
@@ -52,30 +54,26 @@
         android:layout_marginRight="5sp"
         android:layout_marginTop="5sp"
         android:elevation="0dp"
-        android:text="View Data"
+        android:text="Save content"
         android:textSize="15sp" />
 
     <Spinner
         android:id="@+id/todo_title_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:dropDownWidth="125dp"
-        android:prompt="@string/select_message" />
+        android:layout_width="205dp"
+        android:layout_height="39dp"
+        android:dropDownWidth="300dp"
+        android:prompt="@string/spinner_prompt" />
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#CCFFFF00"
-        android:textSize="12sp"
-        android:textStyle="bold" />
+
     <ListView
         android:id="@+id/listview_todo_details"
         android:choiceMode="singleChoice"
         android:listSelector="#99cccc"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="match_parent"
         android:layout_margin="20dp"
-        android:background="#cacaca" />
+        android:background="#cacaca"
+        />
+
 
 </LinearLayout>
