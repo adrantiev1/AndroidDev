@@ -1,13 +1,25 @@
 package com.example.anton.todoornot;
 
 import android.content.ContentValues;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,7 +30,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener ,SharedPreferences.OnSharedPreferenceChangeListener{
 
     static final String TAG = "ToDoList_MainActivity";
 
@@ -36,17 +48,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     static int currentListIndex = 0;
 
 
-
-
-//usecase on populate title table
-// usecase retribve titles into an array
-// populate drop down with titles
-
-
+    SharedPreferences prefs;
+    View mainview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(Build.VERSION.SDK_INT > 9 )
+        {
+            StrictMode.ThreadPolicy policy =
+                    new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefs.registerOnSharedPreferenceChangeListener(this);
+
+        mainview = findViewById(R.id.layout_main_activity);
+        String bgColor = prefs.getString("main_bg_color", "#ccdd3c");
+        mainview.setBackgroundColor(Color.parseColor(bgColor));
+
 
         //for spinner
         mySpinner = (Spinner) findViewById(R.id.todo_title_spinner);
@@ -94,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     try {
                         database = myDbHelper.getWritableDatabase();
                         database.insertOrThrow(DBManager.TABLE_TITLES, null, values);
-                        Toast.makeText(this, "You have added a todo title " + messageTitle, Toast.LENGTH_LONG).show();
+                        toastMessage("You have added a todo title ");
                         database.close();
 
                         refreshSpinner();
@@ -123,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     try {
                         database = myDbHelper.getWritableDatabase();
                         database.insertOrThrow(DBManager.TABLE_DETAILS, null, values);
-                        Toast.makeText(this, "You have added a todo title " + todoContent, Toast.LENGTH_LONG).show();
+                        toastMessage("You have added a todo content ");
                         database.close();
 
                     } catch (Exception e) {
@@ -143,16 +165,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    private void toastMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
+
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         currentItemIndex = position;
-        Toast.makeText(this, todoDetails.get(position).getContent(), Toast.LENGTH_LONG).show();
+        toastMessage(todoDetails.get(position).getContent());
         Log.d(TAG,"onItemClick!"+ position);
 
+        String content =  todoDetails.get(position).getContent();
+        Cursor data = myDbHelper.getItemID(content); //get the id og the content
+        int contentId = -1;
+        while (data.moveToNext()){
+            contentId = data.getInt(0);
+        }
+        if (contentId > -1){
+            Log.d(TAG,"onItemClick, content ID = "+ contentId);
+            Intent editContentIntent = new Intent(MainActivity.this,EditContentActivity.class);
+            editContentIntent.putExtra("id",contentId);
+            editContentIntent.putExtra("content",content);
+            startActivity(editContentIntent);
+        }else {
+            toastMessage("No ID was found for this content");
+
+        }
 
     }
 
@@ -231,5 +267,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+    private void toastMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        String bgColor = prefs.getString("main_bg_color", "#1c2c3c");
+        mainview.setBackgroundColor(Color.parseColor(bgColor));
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP )
+        {
+            ActionBar bar  = this.getSupportActionBar();
+            bar.setBackgroundDrawable((new ColorDrawable(Color.parseColor(bgColor))));
+
+            bar.setDisplayHomeAsUpEnabled(true);
+
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.parseColor("#009999"));
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.menu_item_prefs:
+            {
+                Intent intent = new Intent(this,prefsActivity.class);
+                this.startActivity(intent);
+                break;
+            }
+            case R.id.menu_item_todo_main:
+            {
+                Intent intent = new Intent(this,MainActivity.class);
+                this.startActivity(intent);
+                break;
+            }
+        }
+
+        return true;
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflator = this.getMenuInflater();
+        inflator.inflate(R.menu.main_menu,menu);
+        return true;
     }
 }

@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">TodoOrNot</string>
     <string name="spinner_prompt">Todo Title</string>
+
+    <string name="menu_prefs">Preferences</string>
+    <string name="menu_main_screen">Todo Main</string>
 </resources>

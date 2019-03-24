@@ -2,6 +2,7 @@ package com.example.anton.todoornot;
 
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
@@ -58,6 +59,27 @@ public class DBManager extends SQLiteOpenHelper {
         db.execSQL("drop table if exists " + TABLE_DETAILS); // drops the old database
         Log.d(TAG, "onUpdated");
         onCreate(db);
+    }
+
+    public Cursor getItemID(String content){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + C_ID + " FROM " + TABLE_DETAILS +
+                " WHERE " + C2_CONTENT + " = '" + content + "'";
+        Cursor data = db.rawQuery(query,null);
+        return data;
+    }
+    public void updateContent(String newContent,int id,String oldContent) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE " + TABLE_DETAILS + " SET " + C2_CONTENT +
+                " = '" + newContent + "' WHERE " + C_ID + " = '" + id + "'" +
+                " AND " + C2_CONTENT + " = '" + oldContent + "'";
+        db.execSQL(query);
+    }
+    public void deleteContent(int id, String content) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM " + TABLE_DETAILS + " WHERE " + C_ID + " = '" + id + "'" +
+                " AND " + C2_CONTENT + " = '" + content + "'";
+        db.execSQL(query);
     }
 }
 //    public boolean addData(String title){
