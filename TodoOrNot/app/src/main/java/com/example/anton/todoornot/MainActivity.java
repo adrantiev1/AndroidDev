@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     static DBManager myDbHelper;
     static int currentItemIndex = 0;
     static int currentListIndex = 0;
+    String currentTitle;
 
 
     SharedPreferences prefs;
@@ -166,6 +167,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Log.d(TAG, "Error" + e);
                         Toast.makeText(this, "Error: " + e, Toast.LENGTH_LONG).show();
                     }
+                    content.setText("");
                     refreshListView();
 
                 } else {
@@ -181,12 +183,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        currentItemIndex = position;
+        currentListIndex = position;
         toastMessage(todoDetails.get(position).getContent());
         Log.d(TAG, "onItemClick!" + position);
 
         String content = todoDetails.get(position).getContent();
         Cursor data = myDbHelper.getItemID(content); //get the id og the content
+
         int contentId = -1;
         while (data.moveToNext()) {
             contentId = data.getInt(0);
@@ -196,6 +199,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent editContentIntent = new Intent(MainActivity.this, EditContentActivity.class);
             editContentIntent.putExtra("id", contentId);
             editContentIntent.putExtra("content", content);
+            editContentIntent.putExtra("title", currentTitle);
             startActivity(editContentIntent);
         } else {
             toastMessage("No ID was found for this content");
@@ -204,17 +208,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Todo todo = (Todo) parent.getAdapter().getItem(position);
         currentItemIndex = todos.get(position).getId();
+        currentTitle = todos.get(position).getTodoTitle();
         if (currentItemIndex > 0) {
             EditText title = (EditText) findViewById(R.id.textbox_list_name);
-            title.setText(todos.get(position).getTodoTitle());
+            title.setText(currentTitle);
         }
         currentListIndex = position;
         refreshListView();
     }
+
 
     private void refreshListView() {
 //        if ( todoDetails.size() > 0)
@@ -287,6 +294,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
+
+    //Prefs Start
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         String bgColor = prefs.getString("main_bg_color", "#1c2c3c");
@@ -329,5 +338,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
-
+    //Prefs End
 }

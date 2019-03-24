@@ -23,7 +23,7 @@
         android:layout_marginLeft="5sp"
         android:layout_marginRight="5sp"
         android:layout_marginTop="5sp"
-        android:background="#CCFFFFFF"
+        android:background="@drawable/rounded_corners"
         android:hint="Enter List Name" />
     <EditText
         android:id="@+id/textbox_content"
@@ -32,38 +32,49 @@
         android:layout_marginLeft="5sp"
         android:layout_marginRight="5sp"
         android:layout_marginTop="5sp"
-        android:background="#CCFFFFFF"
+        android:background="@drawable/rounded_corners"
         android:hint="Enter your content" />
 
-    <Button
-        android:id="@+id/button_send_to_list"
-        android:layout_width="195dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5sp"
-        android:layout_marginLeft="5sp"
-        android:layout_marginRight="5sp"
-        android:layout_marginTop="5sp"
-        android:elevation="0dp"
-        android:text="Save Title"
-        android:textSize="15sp" />
-    <Button
-        android:id="@+id/button_save_content"
-        android:layout_width="195dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5sp"
-        android:layout_marginLeft="5sp"
-        android:layout_marginRight="5sp"
-        android:layout_marginTop="5sp"
-        android:elevation="0dp"
-        android:text="Save content"
-        android:textSize="15sp" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/button_send_to_list"
+            android:layout_width="195dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5sp"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
+            android:layout_marginTop="5sp"
+            android:elevation="0dp"
+            android:text="Save Title"
+            android:textSize="15sp" />
+        <Button
+            android:id="@+id/button_save_content"
+            android:layout_width="195dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5sp"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
+            android:layout_marginTop="5sp"
+            android:layout_toRightOf="@id/button_send_to_list"
+            android:elevation="0dp"
+            android:text="Save content"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
 
     <Spinner
         android:id="@+id/todo_title_spinner"
-        android:layout_width="205dp"
-        android:layout_height="39dp"
-        android:dropDownWidth="300dp"
-        android:prompt="@string/spinner_prompt" />
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:prompt="@string/spinner_prompt"
+
+        />
 
 
     <ListView
