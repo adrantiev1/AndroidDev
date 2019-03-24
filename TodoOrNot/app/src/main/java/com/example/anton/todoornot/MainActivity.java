@@ -28,10 +28,18 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener ,SharedPreferences.OnSharedPreferenceChangeListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
     static final String TAG = "ToDoList_MainActivity";
 
@@ -51,13 +59,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     SharedPreferences prefs;
     View mainview;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(Build.VERSION.SDK_INT > 9 )
-        {
+        if (Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy =
                     new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
@@ -146,8 +154,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     values.put(DBManager.C1_TITLE_ID, currentItemIndex);
                     values.put(DBManager.C2_CONTENT, todoContent);
-                    values.put(DBManager.C3_DATE,date);
-                    values.put(DBManager.C4_COMPLETED_FLAG,completeFlag);
+                    values.put(DBManager.C3_DATE, date);
+                    values.put(DBManager.C4_COMPLETED_FLAG, completeFlag);
                     try {
                         database = myDbHelper.getWritableDatabase();
                         database.insertOrThrow(DBManager.TABLE_DETAILS, null, values);
@@ -171,27 +179,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         currentItemIndex = position;
         toastMessage(todoDetails.get(position).getContent());
-        Log.d(TAG,"onItemClick!"+ position);
+        Log.d(TAG, "onItemClick!" + position);
 
-        String content =  todoDetails.get(position).getContent();
+        String content = todoDetails.get(position).getContent();
         Cursor data = myDbHelper.getItemID(content); //get the id og the content
         int contentId = -1;
-        while (data.moveToNext()){
+        while (data.moveToNext()) {
             contentId = data.getInt(0);
         }
-        if (contentId > -1){
-            Log.d(TAG,"onItemClick, content ID = "+ contentId);
-            Intent editContentIntent = new Intent(MainActivity.this,EditContentActivity.class);
-            editContentIntent.putExtra("id",contentId);
-            editContentIntent.putExtra("content",content);
+        if (contentId > -1) {
+            Log.d(TAG, "onItemClick, content ID = " + contentId);
+            Intent editContentIntent = new Intent(MainActivity.this, EditContentActivity.class);
+            editContentIntent.putExtra("id", contentId);
+            editContentIntent.putExtra("content", content);
             startActivity(editContentIntent);
-        }else {
+        } else {
             toastMessage("No ID was found for this content");
 
         }
@@ -212,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void refreshListView() {
 //        if ( todoDetails.size() > 0)
-            cursor = populateDetialsArray();
+        cursor = populateDetialsArray();
         CursorAdapter adapter = new CursorAdapter(this, cursor);
         listView.setAdapter(adapter);
 
@@ -226,7 +232,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         cursor = database.query(DBManager.TABLE_DETAILS, null, whereClause, null, null, null, null);
         startManagingCursor(cursor);
-        String content, dateCreated , completeFlag;
+        String content, dateCreated, completeFlag;
         int id, titleId;
         //boolean bcompleted;
 
@@ -236,7 +242,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             content = cursor.getString(cursor.getColumnIndex(DBManager.C2_CONTENT));
             dateCreated = cursor.getString(cursor.getColumnIndex(DBManager.C3_DATE));
             completeFlag = cursor.getString(cursor.getColumnIndex(DBManager.C4_COMPLETED_FLAG));
-
 
 
             TodoDetail item = new TodoDetail(id, titleId, content, dateCreated, completeFlag);
@@ -277,6 +282,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
     private void toastMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
@@ -286,9 +292,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String bgColor = prefs.getString("main_bg_color", "#1c2c3c");
         mainview.setBackgroundColor(Color.parseColor(bgColor));
 
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP )
-        {
-            ActionBar bar  = this.getSupportActionBar();
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            ActionBar bar = this.getSupportActionBar();
             bar.setBackgroundDrawable((new ColorDrawable(Color.parseColor(bgColor))));
 
             bar.setDisplayHomeAsUpEnabled(true);
@@ -301,17 +306,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId())
-        {
-            case R.id.menu_item_prefs:
-            {
-                Intent intent = new Intent(this,prefsActivity.class);
+        switch (item.getItemId()) {
+            case R.id.menu_item_prefs: {
+                Intent intent = new Intent(this, prefsActivity.class);
                 this.startActivity(intent);
                 break;
             }
-            case R.id.menu_item_todo_main:
-            {
-                Intent intent = new Intent(this,MainActivity.class);
+            case R.id.menu_item_todo_main: {
+                Intent intent = new Intent(this, MainActivity.class);
                 this.startActivity(intent);
                 break;
             }
@@ -319,11 +321,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         return true;
     }
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflator = this.getMenuInflater();
-        inflator.inflate(R.menu.main_menu,menu);
+        inflator.inflate(R.menu.main_menu, menu);
         return true;
     }
+
+
 }

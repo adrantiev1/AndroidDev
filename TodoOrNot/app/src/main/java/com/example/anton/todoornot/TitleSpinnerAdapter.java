@@ -65,7 +65,7 @@ public class TitleSpinnerAdapter  extends ArrayAdapter{
 
         label.setTextColor(Color.BLUE);
         label.setTextSize(20);
-         Todo todo = getItem(position);
+        Todo todo = getItem(position);
         label.setText(todo.getTodoTitle());
         return label;
     }

@@ -59,6 +59,7 @@ public class DBManager extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+
     public Cursor getItemID(String content){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT " + C_ID + " FROM " + TABLE_DETAILS +
@@ -74,6 +75,7 @@ public class DBManager extends SQLiteOpenHelper {
         db.execSQL(query);
     }
     public void deleteContent(int id, String content) {
+
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "DELETE FROM " + TABLE_DETAILS + " WHERE " + C_ID + " = '" + id + "'" +
                 " AND " + C2_CONTENT + " = '" + content + "'";
