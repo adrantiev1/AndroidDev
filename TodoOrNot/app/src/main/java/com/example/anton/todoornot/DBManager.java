@@ -44,11 +44,9 @@ public class DBManager extends SQLiteOpenHelper {
         Log.d(TAG, sql);
         db.execSQL(sql);
 
-//        sql = "create table " + TABLE_DETAILS + " (" + C_ID +  " INTEGER PRIMARY KEY AUTOINCREMENT, "
-//            + C1_TITLE_ID + " text, " + C2_CONTENT + " text, " + C3_DATE + " text, " + C4_COMPLETED_FLAG + " text)";
 
         sql = "create table " + TABLE_DETAILS + " (" + C_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + C1_TITLE_ID + " integer, " + C2_CONTENT + " text, " + C4_COMPLETED_FLAG + " text)";
+                + C1_TITLE_ID + " integer, " + C2_CONTENT + " text, " + C3_DATE + " text, " + C4_COMPLETED_FLAG + " text)";
         Log.d(TAG, sql);
         db.execSQL(sql);
     }

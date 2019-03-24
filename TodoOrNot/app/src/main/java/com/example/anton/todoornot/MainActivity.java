@@ -29,6 +29,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener ,SharedPreferences.OnSharedPreferenceChangeListener{
 
@@ -136,12 +137,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 EditText content = (EditText) findViewById(R.id.textbox_content);
                 String todoContent = content.getText().toString();
+                String date = Calendar.getInstance().getTime().toString();
+                String completeFlag = "0";
 
                 if (todoContent.length() != 0) {
 
                     ContentValues values = new ContentValues();
-                    values.put(DBManager.C2_CONTENT, todoContent);
+
                     values.put(DBManager.C1_TITLE_ID, currentItemIndex);
+                    values.put(DBManager.C2_CONTENT, todoContent);
+                    values.put(DBManager.C3_DATE,date);
+                    values.put(DBManager.C4_COMPLETED_FLAG,completeFlag);
                     try {
                         database = myDbHelper.getWritableDatabase();
                         database.insertOrThrow(DBManager.TABLE_DETAILS, null, values);
@@ -220,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         cursor = database.query(DBManager.TABLE_DETAILS, null, whereClause, null, null, null, null);
         startManagingCursor(cursor);
-        String content, output;
+        String content, dateCreated , completeFlag;
         int id, titleId;
         //boolean bcompleted;
 
@@ -228,9 +234,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             id = cursor.getInt(cursor.getColumnIndex(DBManager.C_ID));
             titleId = cursor.getInt(cursor.getColumnIndex(DBManager.C1_TITLE_ID));
             content = cursor.getString(cursor.getColumnIndex(DBManager.C2_CONTENT));
+            dateCreated = cursor.getString(cursor.getColumnIndex(DBManager.C3_DATE));
+            completeFlag = cursor.getString(cursor.getColumnIndex(DBManager.C4_COMPLETED_FLAG));
 
 
-            TodoDetail item = new TodoDetail(id, titleId, content);
+
+            TodoDetail item = new TodoDetail(id, titleId, content, dateCreated, completeFlag);
             todoDetails.add(item);
         }
 

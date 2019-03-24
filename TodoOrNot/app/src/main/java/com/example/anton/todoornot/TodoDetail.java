@@ -6,15 +6,17 @@ package com.example.anton.todoornot;
 
 public class TodoDetail {
     private int id;
-    private  int titleId;
-    private  String content;
-//    private  boolean completed;
+    private int titleId;
+    private String content;
+    private String dateCreated;
+    private String completeFlag;
 
-    public TodoDetail(int id, int titleId, String content)
-    {
+    public TodoDetail(int id, int titleId, String content,String dateCreated, String completeFlag) {
         this.id = id;
         this.titleId = titleId;
         this.content = content;
+        this.dateCreated = dateCreated;
+        this.completeFlag = completeFlag;
 
 
     }
@@ -43,12 +45,21 @@ public class TodoDetail {
         this.content = description;
     }
 
-//    public boolean getComleted() {
-//        return completed;
-//    }
-//
-//    public void setCompleted(boolean price) {
-//        this.completed = completed;
-//    }
-//}
+
+    public String getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(String dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public String getCompleteFlag() {
+        return completeFlag;
+    }
+
+    public void setCompleteFlag(String completeFlag) {
+        this.completeFlag = completeFlag;
+    }
+
 }
