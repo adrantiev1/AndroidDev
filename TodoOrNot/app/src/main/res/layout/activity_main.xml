@@ -63,7 +63,9 @@
             android:textSize="15sp" />
     </RelativeLayout>
 
-
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
     <Spinner
         android:id="@+id/todo_title_spinner"
         android:layout_height="wrap_content"
@@ -75,6 +77,14 @@
         android:prompt="@string/spinner_prompt"
 
         />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Completed in Gary"
+        android:textColor="#D3D3D3"
+        android:layout_toRightOf="@id/todo_title_spinner"/>
+</RelativeLayout>
+
 
 
     <ListView

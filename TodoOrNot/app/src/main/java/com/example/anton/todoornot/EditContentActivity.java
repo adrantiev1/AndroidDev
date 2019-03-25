@@ -2,6 +2,7 @@ package com.example.anton.todoornot;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -33,7 +35,7 @@ import java.util.List;
 
 public class EditContentActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-    private Button buttonSave,buttonDelete;
+    private Button buttonSave, buttonDelete;
     private EditText editableText_content;
 
     DBManager myDbHelper;
@@ -41,6 +43,7 @@ public class EditContentActivity extends AppCompatActivity implements SharedPref
     private String selectedContent;
     private int selectedId;
     private String selectedTitle;
+    private CheckBox checkBoxCompleted;
 
     SharedPreferences prefs;
     View mainview;
@@ -54,17 +57,17 @@ public class EditContentActivity extends AppCompatActivity implements SharedPref
         setContentView(R.layout.activity_edit_content);
 
 
-
         //declare everything
-        buttonDelete = (Button)findViewById(R.id.button_delete);
-        buttonSave = (Button)findViewById(R.id.button_save);
-        editableText_content = (EditText)findViewById(R.id.edit_text_content);
+        buttonDelete = (Button) findViewById(R.id.button_delete);
+        buttonSave = (Button) findViewById(R.id.button_save);
+        checkBoxCompleted = (CheckBox)findViewById(R.id.checkbox_completed);
+        editableText_content = (EditText) findViewById(R.id.edit_text_content);
         myDbHelper = new DBManager(this);
 
         //get intent from MainActivity
         Intent receivedIntent = getIntent();
 
-        selectedId = receivedIntent.getIntExtra("id",-1);
+        selectedId = receivedIntent.getIntExtra("id", -1);
         selectedContent = receivedIntent.getStringExtra("content");
         selectedTitle = receivedIntent.getStringExtra("title");
         editableText_content.setText(selectedContent);
@@ -73,41 +76,72 @@ public class EditContentActivity extends AppCompatActivity implements SharedPref
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         prefs.registerOnSharedPreferenceChangeListener(this);
 
-        userName = prefs.getString("login_name",null);
+        userName = prefs.getString("login_name", null);
         pass = prefs.getString("login_password", null);
 
         mainview = findViewById(R.id.layout_edit_content);
         String bgColor = prefs.getString("main_bg_color", "#ccdd3c");
         mainview.setBackgroundColor(Color.parseColor(bgColor));
 
-        buttonSave.setOnClickListener(new View.OnClickListener(){
+        buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 String editedContent = editableText_content.getText().toString();
-                if (!editedContent.equals("")){
-                    myDbHelper.updateContent(editedContent,selectedId,selectedContent);
+                if (!editedContent.equals("")) {
+                    myDbHelper.updateContent(editedContent, selectedId, selectedContent);
                     toastMessage("Saved succesfuly");
-                }else {
+                } else {
                     toastMessage("You must enter some content");
                 }
+                //check completed
+                if (checkBoxCompleted.isChecked()){
+                    myDbHelper.updateStatus("1",selectedId);
+                }else{
+                    myDbHelper.updateStatus("0",selectedId);
+                }
+
             }
         });
-        buttonDelete.setOnClickListener(new View.OnClickListener(){
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                postReview(selectedContent,selectedTitle,userName,pass);
-                myDbHelper.deleteContent(selectedId,selectedContent);
+            public void onClick(View view) {
+                postReview(selectedContent, selectedTitle, userName, pass);
+                myDbHelper.deleteContent(selectedId, selectedContent);
                 editableText_content.setText("");
                 toastMessage("Deleted succesfuly");
             }
         });
+
+
+        checkCheckBox();
+
+
+
     }
+
+    private void checkCheckBox() {
+        String flagData="";
+        Cursor cursor = myDbHelper.getFlag(selectedId);
+        if (cursor.moveToFirst()){
+            do{
+                flagData = cursor.getString(cursor.getColumnIndex(DBManager.C4_COMPLETED_FLAG));
+                // do what ever you want here
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+
+        if (flagData.equals("1")){
+            checkBoxCompleted.setChecked(true);
+        }else {
+            checkBoxCompleted.setChecked(false);
+        }
+    }
+
     private void postReview(String content, String title, String userName, String pass) {
 
 
-
         String date = Calendar.getInstance().getTime().toString();
-
+        String flag = "1";
         toastMessage("Error: " + title + content + "user" + "pass" + "date");
         try {
             HttpClient client = new DefaultHttpClient();
@@ -116,7 +150,7 @@ public class EditContentActivity extends AppCompatActivity implements SharedPref
 
             postParameters.add(new BasicNameValuePair("LIST_TITLE", title));
             postParameters.add(new BasicNameValuePair("CONTENT", content));
-            postParameters.add(new BasicNameValuePair("COMPLETED_FLAG", "1"));
+            postParameters.add(new BasicNameValuePair("COMPLETED_FLAG", flag));
             postParameters.add(new BasicNameValuePair("ALIAS", userName));
             postParameters.add(new BasicNameValuePair("PASSWORD ", pass));
             postParameters.add(new BasicNameValuePair("CREATED_DATE ", date));
@@ -126,7 +160,7 @@ public class EditContentActivity extends AppCompatActivity implements SharedPref
             client.execute(post);
 
         } catch (Exception ex) {
-            toastMessage("Error: " + ex + title + content + userName + pass + date);
+            toastMessage("Error: " + ex + title + content + flag + userName + pass + date);
         }
     }
 

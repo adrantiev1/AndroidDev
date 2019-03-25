@@ -67,11 +67,24 @@ public class DBManager extends SQLiteOpenHelper {
         Cursor data = db.rawQuery(query,null);
         return data;
     }
+    public Cursor getFlag(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + C4_COMPLETED_FLAG + " FROM " + TABLE_DETAILS +
+                " WHERE " + C_ID + " = '" + id + "'";
+        Cursor data = db.rawQuery(query,null);
+        return data;
+    }
     public void updateContent(String newContent,int id,String oldContent) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "UPDATE " + TABLE_DETAILS + " SET " + C2_CONTENT +
                 " = '" + newContent + "' WHERE " + C_ID + " = '" + id + "'" +
                 " AND " + C2_CONTENT + " = '" + oldContent + "'";
+        db.execSQL(query);
+    }
+    public void updateStatus(String flag,int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE " + TABLE_DETAILS + " SET " + C4_COMPLETED_FLAG +
+                " = '" + flag + "' WHERE " + C_ID + " = '" + id + "'";
         db.execSQL(query);
     }
     public void deleteContent(int id, String content) {

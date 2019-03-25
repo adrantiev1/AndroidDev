@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
@@ -49,13 +50,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ListView listView;
     Cursor cursor;
 
-    static ArrayList<Todo> todos;
-    static ArrayList<TodoDetail> todoDetails;
+    ArrayList<Todo> todos;
+    ArrayList<TodoDetail> todoDetails;
     static SQLiteDatabase database;
     static DBManager myDbHelper;
     static int currentItemIndex = 0;
     static int currentListIndex = 0;
     String currentTitle;
+
+
 
 
     SharedPreferences prefs;
@@ -99,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         todos = new ArrayList<Todo>();
         refreshSpinner();
         refreshListView();
-
+        //changeColorCompleted();
         Log.d(TAG, "onCreate() called");
     }
 
@@ -224,8 +227,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void refreshListView() {
-//        if ( todoDetails.size() > 0)
-        cursor = populateDetialsArray();
+//        if (!todoDetails.isEmpty()) {
+            cursor = populateDetialsArray();
+
         CursorAdapter adapter = new CursorAdapter(this, cursor);
         listView.setAdapter(adapter);
 
@@ -293,6 +297,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void toastMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
+    public void changeColorCompleted(){
+        TextView flag = (TextView)findViewById(R.id.tv_completed_flag);
+
+        if (flag.getText().toString().equals("1")){
+            flag.setTextColor(Color.BLUE);
+        }
+
+    }
+
 
 
     //Prefs Start
