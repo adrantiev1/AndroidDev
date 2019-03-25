@@ -5,12 +5,14 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.nfc.Tag;
 import android.os.Build;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -35,6 +37,7 @@ import java.util.List;
 
 public class EditContentActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
+    static final String TAG = "ToDoList_MainActivity";
     private Button buttonSave, buttonDelete;
     private EditText editableText_content;
 
@@ -142,7 +145,7 @@ public class EditContentActivity extends AppCompatActivity implements SharedPref
 
         String date = Calendar.getInstance().getTime().toString();
         String flag = "1";
-        toastMessage("Error: " + title + content + "user" + "pass" + "date");
+        Log.d(TAG,"PAss " + pass + "Username "+ userName);
         try {
             HttpClient client = new DefaultHttpClient();
             HttpPost post = new HttpPost("http://www.youcode.ca/Lab02Post.jsp");
@@ -152,8 +155,8 @@ public class EditContentActivity extends AppCompatActivity implements SharedPref
             postParameters.add(new BasicNameValuePair("CONTENT", content));
             postParameters.add(new BasicNameValuePair("COMPLETED_FLAG", flag));
             postParameters.add(new BasicNameValuePair("ALIAS", userName));
-            postParameters.add(new BasicNameValuePair("PASSWORD ", pass));
-            postParameters.add(new BasicNameValuePair("CREATED_DATE ", date));
+            postParameters.add(new BasicNameValuePair("PASSWORD", pass));
+            postParameters.add(new BasicNameValuePair("CREATED_DATE", date));
 
             UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(postParameters);
             post.setEntity(formEntity);
