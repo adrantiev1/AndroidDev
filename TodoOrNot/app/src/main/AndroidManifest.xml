@@ -18,8 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EditContentActivity"></activity>
-        <activity android:name=".prefsActivity"></activity>
+        <activity android:name=".EditContentActivity" />
+        <activity android:name=".prefsActivity" />
+        <activity android:name=".ViewArchivedActivity"></activity>
     </application>
 
 </manifest>

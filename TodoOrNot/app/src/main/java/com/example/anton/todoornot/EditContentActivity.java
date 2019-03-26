@@ -38,7 +38,7 @@ import java.util.List;
 public class EditContentActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     static final String TAG = "ToDoList_MainActivity";
-    private Button buttonSave, buttonDelete;
+    private Button buttonSave, buttonDelete, buttonArchive;
     private EditText editableText_content;
 
     DBManager myDbHelper;
@@ -63,6 +63,7 @@ public class EditContentActivity extends AppCompatActivity implements SharedPref
         //declare everything
         buttonDelete = (Button) findViewById(R.id.button_delete);
         buttonSave = (Button) findViewById(R.id.button_save);
+        buttonArchive = (Button)findViewById(R.id.button_archive);
         checkBoxCompleted = (CheckBox)findViewById(R.id.checkbox_completed);
         editableText_content = (EditText) findViewById(R.id.edit_text_content);
         myDbHelper = new DBManager(this);
@@ -108,12 +109,22 @@ public class EditContentActivity extends AppCompatActivity implements SharedPref
         buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                postReview(selectedContent, selectedTitle, userName, pass);
+
                 myDbHelper.deleteContent(selectedId, selectedContent);
                 editableText_content.setText("");
                 toastMessage("Deleted succesfuly");
             }
         });
+        buttonArchive.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                postReview(selectedContent, selectedTitle, userName, pass);
+                editableText_content.setText("");
+                toastMessage("Archived succesfuly");
+            }
+        });
+
 
 
         checkCheckBox();
@@ -169,6 +180,7 @@ public class EditContentActivity extends AppCompatActivity implements SharedPref
 
     private void toastMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+
     }
 
     @Override

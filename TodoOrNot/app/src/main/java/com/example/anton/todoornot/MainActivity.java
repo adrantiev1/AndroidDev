@@ -339,6 +339,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 this.startActivity(intent);
                 break;
             }
+            case R.id.menu_item_view_archived: {
+                Intent intent = new Intent(this, ViewArchivedActivity.class);
+                this.startActivity(intent);
+                break;
+            }
         }
 
         return true;
