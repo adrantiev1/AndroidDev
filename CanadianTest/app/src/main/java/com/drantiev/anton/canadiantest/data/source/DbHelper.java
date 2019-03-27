@@ -25,10 +25,10 @@ import static com.drantiev.anton.canadiantest.data.source.BaseDataClass.TABLE_QU
  */
 
 public class DbHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
+    static final int DATABASE_VERSION = 1;
     //DB Name
-    private static final String DATABASE_NAME = "CANADIAN_QUESTIONS";
-    private SQLiteDatabase database;
+    static final String DATABASE_NAME = "CANADIAN_QUESTIONS.db";
+    SQLiteDatabase database;
 
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -38,19 +38,27 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         database = db;
-        String query = "CREATE TABLE IF NOT EXISTS " + TABLE_QUESTIONS + " ( "
-                + C_ID + "INTEGER PRIMARY KEY AUTOINCREMENT, " + C_QUESTION
+        String query = "CREATE TABLE IF NOT EXISTS " + TABLE_QUESTIONS + " ("
+                + C_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + C_QUESTION
                 + "TEXT, " + C_ANSWER + " TEXT, " + C_OPTION_A + " TEXT, "
                 + C_OPTION_B + " TEXT, " + C_OPTION_C + " TEXT)";
         db.execSQL(query);
-        addQuestion();
-        //db.close();
+        addQuestions();
+//        db.close();
 
     }
 
-    private void addQuestion() {
+    private void addQuestions() {
         Question q1 = new Question("How old are you?", "29", "3", "23", "54");
+        this.addQuestion(q1);
         Question q2 = new Question("Whats your name?", "Anton", "Morkis", "Larias", "John");
+        this.addQuestion(q2);
+        Question q3 = new Question("How old are you?", "29", "3", "23", "54");
+        this.addQuestion(q3);
+        Question q4 = new Question("Whats your name?", "Anton", "Morkis", "Larias", "John");
+        this.addQuestion(q4);
+        Question q5 = new Question("How old are you?", "29", "3", "23", "54");
+        this.addQuestion(q5);
     }
 
     @Override
@@ -60,7 +68,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public void addQuestion(Question question) {
-        //SQLiteDatabase db = this.getWritableDatabase();
+        database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(C_QUESTION, question.getQuestion());
         values.put(C_ANSWER, question.getAnswer());
