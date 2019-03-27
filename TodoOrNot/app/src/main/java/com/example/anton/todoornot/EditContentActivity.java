@@ -85,6 +85,7 @@ public class EditContentActivity extends AppCompatActivity implements SharedPref
 
         mainview = findViewById(R.id.layout_edit_content);
         String bgColor = prefs.getString("main_bg_color", "#ccdd3c");
+
         mainview.setBackgroundColor(Color.parseColor(bgColor));
 
         buttonSave.setOnClickListener(new View.OnClickListener() {
@@ -138,13 +139,14 @@ public class EditContentActivity extends AppCompatActivity implements SharedPref
 
     }
 
+
     private String checkCheckBox() {
         String flagData="";
         Cursor cursor = myDbHelper.getFlag(selectedId);
         if (cursor.moveToFirst()){
             do{
                 flagData = cursor.getString(cursor.getColumnIndex(DBManager.C4_COMPLETED_FLAG));
-                // do what ever you want here
+
             }while(cursor.moveToNext());
         }
         cursor.close();

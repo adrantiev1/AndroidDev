@@ -14,8 +14,7 @@ import android.widget.TextView;
 public class CursorAdapter extends SimpleCursorAdapter {
 
     static final String TAG = "CursorAdapter";
-//    static final String[] FROM = {DBManager.C_ID, DBManager.C1_TITLE_ID, DBManager.C2_CONTENT};
-//    static final int[] TO = {R.id.tv_title_id, R.id.tv_detail_id, R.id.tv_content};
+
     static final String[] FROM = {DBManager.C2_CONTENT, DBManager.C3_DATE,DBManager.C4_COMPLETED_FLAG};
     static final int[] TO = {R.id.tv_content, R.id.tv_date_created,R.id.tv_completed_flag};
 
@@ -27,6 +26,7 @@ public class CursorAdapter extends SimpleCursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
 
+        //change color for completed tasks to gary
         String label = cursor.getString(cursor.getColumnIndex(DBManager.C4_COMPLETED_FLAG));
         if (label.equals("1")){
             int color = Color.parseColor("#D3D3D3");

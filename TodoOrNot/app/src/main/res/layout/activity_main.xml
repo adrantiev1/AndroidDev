@@ -8,9 +8,10 @@
     android:id="@+id/layout_main_activity">
 
     <TextView
+        android:id="@+id/tv_header"
         android:layout_height="wrap_content"
         android:text="Todo List App"
-        android:textSize="25sp"
+        android:textSize="@dimen/font_size_large"
         android:textColor="#000"
         android:layout_width="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -78,11 +79,14 @@
 
         />
     <TextView
+        android:id="@+id/tv_flag_explain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Completed in Gary"
         android:textColor="#D3D3D3"
         android:layout_toRightOf="@id/todo_title_spinner"/>
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
 
 

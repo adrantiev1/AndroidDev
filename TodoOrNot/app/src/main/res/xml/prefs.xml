@@ -17,5 +17,12 @@
         android:defaultValue="#ffffff"
         android:entries="@array/color_names"
         android:entryValues="@array/color_values"/>
+    <ListPreference
+        android:key="text_size"
+        android:title="Font Size"
+        android:summary="Choose text size here"
+        android:defaultValue="25"
+        android:entries="@array/text_sizes"
+        android:entryValues="@array/size_values"/>
 
 </PreferenceScreen>

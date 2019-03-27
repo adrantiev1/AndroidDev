@@ -15,6 +15,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -59,9 +60,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     static int currentListIndex = 0;
     String currentTitle;
 
+    TextView header, flagExplain, content, date, flag;
+
 
     SharedPreferences prefs;
     View mainview;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +81,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         prefs.registerOnSharedPreferenceChangeListener(this);
 
+
         mainview = findViewById(R.id.layout_main_activity);
         String bgColor = prefs.getString("main_bg_color", "#ccdd3c");
+        float textSize = Float.parseFloat(prefs.getString("text_size", null));
+        changeFontSize(textSize);
         mainview.setBackgroundColor(Color.parseColor(bgColor));
 
 
@@ -101,9 +108,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         todos = new ArrayList<Todo>();
         refreshSpinner();
         refreshListView();
-        //changeColorCompleted();
+
         Log.d(TAG, "onCreate() called");
     }
+    public void changeFontSize(float textSize){
+
+        header = (TextView) findViewById(R.id.tv_header);
+        content  = (TextView) findViewById(R.id.tv_content);
+        date  =(TextView) findViewById(R.id.tv_date_created);
+        flag = (TextView) findViewById(R.id.tv_completed_flag);
+        flagExplain = (TextView) findViewById(R.id.tv_flag_explain);
+
+        header.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        if (date != null ){
+            content.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+            date.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+            flag.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+
+        }
+
+        flagExplain.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+    }
+
 
     private void refreshSpinner() {
         populateTitlesArray();
@@ -297,25 +323,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    public void changeColorCompleted() {
-        TextView flag = (TextView) findViewById(R.id.tv_completed_flag);
-
-        if (flag.getText().toString().equals("1")) {
-            flag.setTextColor(Color.BLUE);
-        }
-
-    }
-
 
     //Prefs Start
-
-
 
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         String bgColor = prefs.getString("main_bg_color", "#1c2c3c");
         mainview.setBackgroundColor(Color.parseColor(bgColor));
+        float textSize = Float.parseFloat(prefs.getString("text_size", null));
+        changeFontSize(textSize);
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             ActionBar bar = this.getSupportActionBar();
