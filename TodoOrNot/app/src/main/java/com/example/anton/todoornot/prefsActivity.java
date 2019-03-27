@@ -1,5 +1,8 @@
 package com.example.anton.todoornot;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
@@ -15,4 +18,7 @@ public class prefsActivity extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         this.addPreferencesFromResource(R.xml.prefs);
     }
+
+
+
 }

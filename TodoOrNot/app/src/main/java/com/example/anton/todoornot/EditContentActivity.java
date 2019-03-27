@@ -127,13 +127,18 @@ public class EditContentActivity extends AppCompatActivity implements SharedPref
 
 
 
-        checkCheckBox();
+        String flagData = checkCheckBox();
+        if (flagData.equals("1")){
+            checkBoxCompleted.setChecked(true);
+        }else {
+            checkBoxCompleted.setChecked(false);
+        }
 
 
 
     }
 
-    private void checkCheckBox() {
+    private String checkCheckBox() {
         String flagData="";
         Cursor cursor = myDbHelper.getFlag(selectedId);
         if (cursor.moveToFirst()){
@@ -143,19 +148,14 @@ public class EditContentActivity extends AppCompatActivity implements SharedPref
             }while(cursor.moveToNext());
         }
         cursor.close();
-
-        if (flagData.equals("1")){
-            checkBoxCompleted.setChecked(true);
-        }else {
-            checkBoxCompleted.setChecked(false);
-        }
+        return flagData;
     }
 
     private void postReview(String content, String title, String userName, String pass) {
 
 
         String date = Calendar.getInstance().getTime().toString();
-        String flag = "1";
+        String flag = checkCheckBox();
         Log.d(TAG,"PAss " + pass + "Username "+ userName);
         try {
             HttpClient client = new DefaultHttpClient();
@@ -210,6 +210,11 @@ public class EditContentActivity extends AppCompatActivity implements SharedPref
             }
             case R.id.menu_item_todo_main: {
                 Intent intent = new Intent(this, MainActivity.class);
+                this.startActivity(intent);
+                break;
+            }
+            case R.id.menu_item_view_archived: {
+                Intent intent = new Intent(this, ViewArchivedActivity.class);
                 this.startActivity(intent);
                 break;
             }

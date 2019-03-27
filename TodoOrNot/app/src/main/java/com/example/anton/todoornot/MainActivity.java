@@ -1,6 +1,7 @@
 package com.example.anton.todoornot;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -57,8 +58,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     static int currentItemIndex = 0;
     static int currentListIndex = 0;
     String currentTitle;
-
-
 
 
     SharedPreferences prefs;
@@ -228,7 +227,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void refreshListView() {
 //        if (!todoDetails.isEmpty()) {
-            cursor = populateDetialsArray();
+        cursor = populateDetialsArray();
 
         CursorAdapter adapter = new CursorAdapter(this, cursor);
         listView.setAdapter(adapter);
@@ -297,18 +296,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void toastMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
-    public void changeColorCompleted(){
-        TextView flag = (TextView)findViewById(R.id.tv_completed_flag);
 
-        if (flag.getText().toString().equals("1")){
+    public void changeColorCompleted() {
+        TextView flag = (TextView) findViewById(R.id.tv_completed_flag);
+
+        if (flag.getText().toString().equals("1")) {
             flag.setTextColor(Color.BLUE);
         }
 
     }
 
 
-
     //Prefs Start
+
+
+
+
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         String bgColor = prefs.getString("main_bg_color", "#1c2c3c");

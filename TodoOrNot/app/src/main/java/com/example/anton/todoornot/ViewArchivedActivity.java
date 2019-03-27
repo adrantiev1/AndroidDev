@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
@@ -30,6 +31,7 @@ public class ViewArchivedActivity extends AppCompatActivity {
     String userName;
 
     ArrayList<HashMap<String, String>> archivedList = new ArrayList<HashMap<String, String>>();
+    String[] values ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,26 +45,20 @@ public class ViewArchivedActivity extends AppCompatActivity {
         userName = prefs.getString("login_name", null);
         pass = prefs.getString("login_password", null);
 
-
-        listView = (ListView) findViewById(R.id.list);
-
-        String[] values = new String[]{"Android List View",
-                "Adapter implementation",
-                "Simple List View In Android",
-                "Create List View Android",
-                "Android Example",
-                "List View Source Code",
-                "List View Array Adapter",
-                "Android Example List View"
-        };
-
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, values);
-
-        listView.setAdapter(adapter);
+        displayArchive();
 
     }
+
+
+    private void displayArchive(){
+        String[] keys = new String[]{"LIST_TITLE","CONTENT","COMPLETED_FLAG","CREATED_DATE"};
+        int[] ids = new int[]{R.id.custom_row_date,R.id.custom_row_title,R.id.custom_row_content,R.id.custom_row_flag};
+        SimpleAdapter adapter = new SimpleAdapter(this,archivedList,R.layout.custom_row_archive,keys,ids);
+        listView = (ListView) findViewById(R.id.listview_custom);
+        populateList();
+        listView.setAdapter(adapter);
+    }
+
 
     private void populateList() {
         if (userName.equals(null) || pass.equals(null)) {
@@ -76,17 +72,22 @@ public class ViewArchivedActivity extends AppCompatActivity {
                 HttpResponse response = client.execute(request);
                 in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
                 String field = "";
+
                 while ((field = in.readLine()) != null) {
-//                Log.d(TAG, "reading from server - vslue =" + Value );
                     HashMap<String, String> temp = new HashMap<String, String>();
                     temp.put("LIST_TITLE", field);
                     field = in.readLine();
                     temp.put("CONTENT", field);
                     field = in.readLine();
+                    temp.put("COMPLETED_FLAG", field);
+                    field = in.readLine();
                     temp.put("CREATED_DATE", field);
+
                     archivedList.add(temp);
 
                 }
+
+
                 in.close();
             } catch (Exception e) {
                 Toast.makeText(this, "Error: " + e, Toast.LENGTH_LONG).show();
