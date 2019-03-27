@@ -84,15 +84,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mainview = findViewById(R.id.layout_main_activity);
         String bgColor = prefs.getString("main_bg_color", "#ccdd3c");
-        float textSize = Float.parseFloat(prefs.getString("text_size", null));
-        changeFontSize(textSize);
+
         mainview.setBackgroundColor(Color.parseColor(bgColor));
 
 
         //for spinner
         mySpinner = (Spinner) findViewById(R.id.todo_title_spinner);
         mySpinner.setOnItemSelectedListener(this);
+
         //spinner done
+        //Setting Font
+        float textSize = Float.parseFloat(prefs.getString("text_size", "18"));
+        changeFontSize(textSize);
 
         Button sendButton = (Button) findViewById(R.id.button_send_to_list);
         sendButton.setOnClickListener(this);
