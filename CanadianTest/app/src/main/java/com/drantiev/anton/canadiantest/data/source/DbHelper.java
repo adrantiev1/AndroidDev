@@ -17,6 +17,7 @@ import static com.drantiev.anton.canadiantest.data.source.BaseDataClass.C_ID;
 import static com.drantiev.anton.canadiantest.data.source.BaseDataClass.C_OPTION_A;
 import static com.drantiev.anton.canadiantest.data.source.BaseDataClass.C_OPTION_B;
 import static com.drantiev.anton.canadiantest.data.source.BaseDataClass.C_OPTION_C;
+import static com.drantiev.anton.canadiantest.data.source.BaseDataClass.C_OPTION_D;
 import static com.drantiev.anton.canadiantest.data.source.BaseDataClass.C_QUESTION;
 import static com.drantiev.anton.canadiantest.data.source.BaseDataClass.TABLE_QUESTIONS;
 
@@ -37,11 +38,11 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        database = db;
-        String query = "CREATE TABLE IF NOT EXISTS " + TABLE_QUESTIONS + " ("
+       database = db;
+        String query = "CREATE TABLE IF NOT EXISTS " + TABLE_QUESTIONS + " ( "
                 + C_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + C_QUESTION
-                + "TEXT, " + C_ANSWER + " TEXT, " + C_OPTION_A + " TEXT, "
-                + C_OPTION_B + " TEXT, " + C_OPTION_C + " TEXT)";
+                + " TEXT, " + C_ANSWER + " TEXT, " + C_OPTION_A + " TEXT, "
+                + C_OPTION_B + " TEXT, " + C_OPTION_C + " TEXT, " + C_OPTION_D +" TEXT)";
         db.execSQL(query);
         addQuestions();
 //        db.close();
@@ -49,15 +50,15 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     private void addQuestions() {
-        Question q1 = new Question("How old are you?", "29", "3", "23", "54");
+        Question q1 = new Question("How old are you?", "29", "3", "23","21", "29");
         this.addQuestion(q1);
-        Question q2 = new Question("Whats your name?", "Anton", "Morkis", "Larias", "John");
+        Question q2 = new Question("Whats your name?", "Anton", "Morkis","Larias",  "Larias", "Anton");
         this.addQuestion(q2);
-        Question q3 = new Question("How old are you?", "29", "3", "23", "54");
+        Question q3 = new Question("How old are you?", "29", "3","23", "23", "29");
         this.addQuestion(q3);
-        Question q4 = new Question("Whats your name?", "Anton", "Morkis", "Larias", "John");
+        Question q4 = new Question("Whats your name?", "Anton", "Morkis", "Morkis", "Larias", "Anton");
         this.addQuestion(q4);
-        Question q5 = new Question("How old are you?", "29", "3", "23", "54");
+        Question q5 = new Question("How old are you?", "29", "3", "23","23", "29");
         this.addQuestion(q5);
     }
 
@@ -68,19 +69,20 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public void addQuestion(Question question) {
-        database = this.getWritableDatabase();
+        //database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(C_QUESTION, question.getQuestion());
         values.put(C_ANSWER, question.getAnswer());
         values.put(C_OPTION_A, question.getOptionA());
         values.put(C_OPTION_B, question.getOptionB());
         values.put(C_OPTION_C, question.getOptionC());
+        values.put(C_OPTION_D, question.getOptionD());
         //insert question
         database.insert(TABLE_QUESTIONS, null, values);
     }
 
     public List<Question> getAllQuestions() {
-        List<Question> questionList = new ArrayList<>();
+        List<Question> questionList = new ArrayList<Question>();
         //Select all
         String selectQuesry = "SELECT * FROM " + TABLE_QUESTIONS;
         database = this.getReadableDatabase();
@@ -95,6 +97,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 question.setOptionA(cursor.getString(3));
                 question.setOptionB(cursor.getString(4));
                 question.setOptionC(cursor.getString(5));
+                question.setOptionD(cursor.getString(6));
                 questionList.add(question);
             } while (cursor.moveToNext());
         }

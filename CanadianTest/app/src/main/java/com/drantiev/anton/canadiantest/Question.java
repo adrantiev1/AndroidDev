@@ -11,6 +11,7 @@ public class Question {
     private String OptionA;
     private String OptionB;
     private String OptionC;
+    private String OptionD;
 
     public Question() {
         Id = 0;
@@ -19,13 +20,15 @@ public class Question {
         OptionA = "";
         OptionB = "";
         OptionC = "";
+        OptionD = "";
     }
-    public Question(String question,String answer, String optionA,String optionB,String optionC){
+    public Question(String question,String answer, String optionA,String optionB,String optionC,String optionD){
         Question = question;
         Answer  = answer;
         OptionA = optionA;
         OptionB = optionB;
         OptionC = optionC;
+        OptionD = optionD;
     }
 
 
@@ -75,5 +78,13 @@ public class Question {
 
     public void setOptionC(String optionC) {
         OptionC = optionC;
+    }
+
+    public String getOptionD() {
+        return OptionD;
+    }
+
+    public void setOptionD(String optionD) {
+        OptionD = optionD;
     }
 }

@@ -13,5 +13,6 @@ public class BaseDataClass {
     public static final String C_OPTION_A = "optionA";
     public static final String C_OPTION_B = "optionB";
     public static final String C_OPTION_C = "optionC";
+    public static final String C_OPTION_D = "optionD";
 
 }
