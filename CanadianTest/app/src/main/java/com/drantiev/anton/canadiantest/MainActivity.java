@@ -2,6 +2,7 @@ package com.drantiev.anton.canadiantest;
 
 import android.content.Intent;
 import android.os.Build;
+import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,8 +33,10 @@ public class MainActivity extends AppCompatActivity {
     DbHelper dbHelper;
 
     //for transition
-    //ViewGroup transitionsContainer = (ViewGroup) findViewById(R.id.transitions_container);
-    //TextView text = (TextView) transitionsContainer.findViewById(R.id.text);
+    ViewGroup transitionsContainer;
+    TextView text;
+
+    final Handler handler = new Handler();
 
 
     @Override
@@ -50,7 +53,13 @@ public class MainActivity extends AppCompatActivity {
         rbB = (RadioButton) findViewById(R.id.rb_b);
         rbC = (RadioButton) findViewById(R.id.rb_c);
         rbD = (RadioButton) findViewById(R.id.rb_d);
-        btnNext = (Button) findViewById(R.id.btn_next);
+
+
+        transitionsContainer = (ViewGroup) findViewById(R.id.transitions_container);
+        text = (TextView)transitionsContainer.findViewById(R.id.text);
+
+
+        btnNext = (Button)transitionsContainer.findViewById(R.id.btn_next);
         setQuestionView();
 
         btnNext.setOnClickListener(new View.OnClickListener() {
@@ -64,27 +73,53 @@ public class MainActivity extends AppCompatActivity {
 //                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 //                    TransitionManager.beginDelayedTransition(transitionsContainer);
 //                }
-//                visible = !visible;
-//                text.setVisibility(visible ? View.VISIBLE : View.GONE);
-
 
                 RadioGroup rbGroup = (RadioGroup) findViewById(R.id.rb_group);
                 RadioButton answare = (RadioButton) findViewById(rbGroup.getCheckedRadioButtonId());
                 rbGroup.clearCheck();
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Do something after 5s = 5000ms
+
+                    }
+                }, 5000);
+
+
                 if (currentQuestion.getAnswer().equals(answare.getText())) ;
                 {
                     score++;
                 }
                 if (questionId < 5) {
-                    currentQuestion = questionList.get(questionId);
-                    setQuestionView();
+                    TransitionManager.beginDelayedTransition(transitionsContainer);
+                    visible = !visible;
+                    text.setVisibility(visible ? View.VISIBLE : View.GONE);
+
+
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            // Do something after 5s = 5000ms
+                            //transition show true answer
+                            currentQuestion = questionList.get(questionId);
+                            setQuestionView();
+                        }
+                    }, 5000);
+
+
                 } else {
+
+
                     Intent intent = new Intent(MainActivity.this, ResultsActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putInt("score", score);
                     intent.putExtras(bundle);
                     startActivity(intent);
                     finish();
+
+
+
                 }
             }
         });
