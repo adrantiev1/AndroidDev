@@ -69,22 +69,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //transition
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//                    TransitionManager.beginDelayedTransition(transitionsContainer);
-//                }
+
 
                 RadioGroup rbGroup = (RadioGroup) findViewById(R.id.rb_group);
                 RadioButton answare = (RadioButton) findViewById(rbGroup.getCheckedRadioButtonId());
                 rbGroup.clearCheck();
 
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Do something after 5s = 5000ms
 
-                    }
-                }, 5000);
 
 
                 if (currentQuestion.getAnswer().equals(answare.getText())) ;
@@ -105,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                             currentQuestion = questionList.get(questionId);
                             setQuestionView();
                         }
-                    }, 5000);
+                    }, 2000);
 
 
                 } else {
