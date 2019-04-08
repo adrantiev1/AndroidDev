@@ -8,18 +8,22 @@
     >
     <LinearLayout
         android:id="@+id/difficulty_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/opening_android_canada"
-        android:alpha="0.7">
+        android:background="@drawable/rock_climber"
+
+        >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Choose your difficulty:"
+            android:textSize="28sp"
+            android:textColor="#fff"
+            android:layout_marginTop="240sp"
             />
         <RadioGroup
             android:id="@+id/rg_difficulty"
@@ -30,17 +34,24 @@
                 android:id="@+id/rb_easy"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Easy"/>
+                android:text="Easy"
+                android:checked="true"
+                android:textSize="22sp"
+                android:textColor="#fff"/>
             <RadioButton
                 android:id="@+id/rb_medium"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Medium"/>
+                android:text="Medium"
+                android:textSize="22sp"
+                android:textColor="#fff"/>
             <RadioButton
                 android:id="@+id/rb_hard"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Hard"/>
+                android:text="Hard"
+                android:textSize="22sp"
+                android:textColor="#fff"/>
         </RadioGroup>
         <Button
             android:id="@+id/btn_continue"
@@ -96,6 +107,7 @@
                 android:layout_height="wrap_content"
                 android:padding="20dp"
                 android:text="radio button"
+                android:checked="true"
                 />
 
             <RadioButton

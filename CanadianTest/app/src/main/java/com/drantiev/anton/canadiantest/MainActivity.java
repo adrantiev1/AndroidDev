@@ -52,22 +52,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mainview = (View) findViewById(R.id.main_view);
+        dbHelper = new DbHelper(this);
 
         transitionsContainerAnswer = (ViewGroup) findViewById(R.id.transitions_container_answer);
         transitionsContainerQuestion = (ViewGroup) findViewById(R.id.transitions_container_question);
         difficultyContainer = (ViewGroup) findViewById(R.id.difficulty_layout);
         btnContinue = (Button)findViewById(R.id.btn_continue);
-        dbHelper = new DbHelper(this);
 
+        //hide questions
         transitionsContainerQuestion.setVisibility(View.GONE);
 
+        // Difficulty radio buttons
         rbEasy = (RadioButton)findViewById(R.id.rb_easy);
         rbHard = (RadioButton)findViewById(R.id.rb_hard);
         rbMedium = (RadioButton)findViewById(R.id.rb_medium);
         rbEasy.setText("Easy");
         rbMedium.setText("Medium");
         rbHard.setText("Hard");
-        //rbGroupDifficulty.clearCheck();
 
         btnContinue.setOnClickListener(new View.OnClickListener() {
 
@@ -84,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
                 }else if(selectedDifficulty.getText().equals("Hard")){
                     difficulty = 3;
                 }
-
 
                 if (difficulty > 0) {
                     transitionsContainerQuestion.setVisibility(View.VISIBLE);

@@ -44,23 +44,23 @@ public class ResultsActivity extends AppCompatActivity {
         {
             case 0: txtResult.setText("You scored 0%, keep learning");
                 if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                    resultLayout.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.home_android_canada) );
+                    resultLayout.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.loser) );
                 } else {
-                    resultLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.home_android_canada));
+                    resultLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.loser));
                 }
                 break;
-            case 1: txtResult.setText("You have 20%, study better");
+            case 1: txtResult.setText("You have 10%, study better");
                 if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                    resultLayout.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.home_android_canada) );
+                    resultLayout.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.loser) );
                 } else {
-                    resultLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.home_android_canada));
+                    resultLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.loser));
                 }
                 break;
             case 2: txtResult.setText("You have 20%, study better");
                 if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                    resultLayout.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.home_android_canada) );
+                    resultLayout.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.loser) );
                 } else {
-                    resultLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.home_android_canada));
+                    resultLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.loser));
                 }
                 break;
             case 3: txtResult.setText("You have 40%, keep learning");
@@ -77,32 +77,47 @@ public class ResultsActivity extends AppCompatActivity {
                     resultLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.home_android_canada));
                 }
                 break;
-            case 5: txtResult.setText("You have 60%, good attempt");
+            case 5: txtResult.setText("You have 50%, good attempt");
                 if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                    resultLayout.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.home_android_canada) );
+                    resultLayout.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.canadian_droid) );
                 } else {
-                    resultLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.home_android_canada));
+                    resultLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.canadian_droid));
                 }
                 break;
             case 6: txtResult.setText("You have 60%, good attempt");
                 if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                    resultLayout.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.home_android_canada) );
+                    resultLayout.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.canadian_droid) );
                 } else {
-                    resultLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.home_android_canada));
+                    resultLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.canadian_droid));
                 }
                 break;
-            case 7: txtResult.setText("You have 60%, good attempt");
+            case 7: txtResult.setText("You have 70%, good attempt");
                 if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                    resultLayout.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.home_android_canada) );
+                    resultLayout.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.canadian_droid) );
                 } else {
-                    resultLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.home_android_canada));
+                    resultLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.canadian_droid));
                 }
                 break;
-            case 8: txtResult.setText("You have 80% Hmmmm.. maybe you have been reading a lot of AndroidProgramming quiz");
+            case 8: txtResult.setText("You have 80% Hmmmm.. maybe you have been reading a lot of history books");
+                if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                    resultLayout.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.opening_android_canada) );
+                } else {
+                    resultLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.opening_android_canada));
+                }
                 break;
-            case 9: txtResult.setText("You have 80% Hmmmm.. maybe you have been reading a lot of AndroidProgramming quiz");
+            case 9: txtResult.setText("You have 90% Hmmmm.. maybe you have been reading a lot of history books");
+                if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                    resultLayout.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.opening_android_canada) );
+                } else {
+                    resultLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.opening_android_canada));
+                }
                 break;
-            case 10: txtResult.setText(" Whao, you have 100%, Who are you? An Android Jet brain");
+            case 10: txtResult.setText(" Whao, you have 100%, Who are you? Great JOB!");
+                if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                    resultLayout.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.opening_android_canada) );
+                } else {
+                    resultLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.opening_android_canada));
+                }
                 break;
 
         }
