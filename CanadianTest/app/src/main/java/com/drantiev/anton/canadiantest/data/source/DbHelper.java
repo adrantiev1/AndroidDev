@@ -50,17 +50,27 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     private void addQuestions() {
-        Question q1 = new Question("How old are you?", "29", "3", "23","21", "29");
+        Question q1 = new Question("What did you have for breakfast today?", "A double-double and a bagel", "Cereal", "A bacon and egg breakfast sandwich","A double-double and a bagel", "Beans and toast");
         this.addQuestion(q1);
-        Question q2 = new Question("Whats your name?", "Anton", "Morkis","Larias",  "Larias", "Anton");
+    Question q2 = new Question("What do you say when you want to get someone's attention?", "Sorry —", "Sorry —","Hey!",  "Nothing — I wave my hand until they notice me", "Excuse me —" );
         this.addQuestion(q2);
-        Question q3 = new Question("How old are you?", "29", "3","23", "23", "29");
+    Question q3 = new Question("What temperature would you consider to be REALLY cold?", "Anything below -30 (not even including wind chill)", "Wait, are we talking Celsius?","Anything below -10", "Anything below -30 (not even including wind chill)", "Anything below 15 degrees");
         this.addQuestion(q3);
-        Question q4 = new Question("Whats your name?", "Anton", "Morkis", "Morkis", "Larias", "Anton");
+    Question q4 = new Question("Canada is eliminated from the Olympic hockey finals. (HAHA YEAH RIGHT, but let's just pretend for a minute.) Who do you root for instead?", "No one, but I still gonna watch it", "No one, but I still gonna watch it", "Russia", "I don't care who wins, I just love hockey so much", "U.S.A.");
         this.addQuestion(q4);
-        Question q5 = new Question("How old are you?", "29", "3", "23","23", "29");
+    Question q5 = new Question("What are your thoughts on bagged milk?","NOT ALL OF CANADA HAS BAGGED MILK, GEEZ" , "NOT ALL OF CANADA HAS BAGGED MILK, GEEZ", "What the hell is bagged milk?","Do you mean tubes?","Totally normal" );
         this.addQuestion(q5);
-    }
+    Question q6 = new Question("It's cold outside and you need something to keep your head warm, you reach for a...","toque", "skull cap", "toque","scarf",  "beret");
+        this.addQuestion(q6);
+    Question q7 = new Question("Does your country have universal healthcare?", "I once went to the hospital because someone hurt my feelings", "HAHAHAHA no, no we do not, I'm swimming in medical bills","No, but I never get sick so it's not really an issue",  "I once went to the hospital because someone hurt my feelings", "Yes, but other countries have it better");
+        this.addQuestion(q7);
+    Question q8 = new Question("How often do you go over your data limit on your phone?", "\"Limit\"? Why wouldn't you just get the unlimited data plan?", "Sometimes, but I'm usually pretty good about staying under it","Never", "\"Limit\"? Why wouldn't you just get the unlimited data plan?", "ALL THE TIME. I'M PAYING A BAZILLION DOLLARS A MONTH FOR CRAP");
+        this.addQuestion(q8);
+    Question q9 = new Question("What do you call the food with macaroni and cheese sauce?", "Kraft Dinner", "Macaroni & cheese", "Cheesey pasta", "Uh, \"macaroni with cheese sauce\"", "Kraft Dinner");
+        this.addQuestion(q9);
+    Question q10 = new Question("You are feeling under the weather, you caught a cold. You will take some of this to feel better...", "Buckley's", "Mr. Pibb", "McIntosh toffee","Buckley's", "Hall's");
+        this.addQuestion(q10);
+}
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
