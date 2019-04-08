@@ -6,6 +6,7 @@ package com.drantiev.anton.canadiantest;
 
 public class Question {
     private int Id;
+    private int DifficultyId;
     private String Question;
     private String Answer;
     private String OptionA;
@@ -15,6 +16,7 @@ public class Question {
 
     public Question() {
         Id = 0;
+        DifficultyId = 0;
         Question = "";
         Answer = "";
         OptionA = "";
@@ -22,9 +24,11 @@ public class Question {
         OptionC = "";
         OptionD = "";
     }
-    public Question(String question,String answer, String optionA,String optionB,String optionC,String optionD){
+
+    public Question(int difficultyId, String question, String answer, String optionA, String optionB, String optionC, String optionD) {
+        DifficultyId = difficultyId;
         Question = question;
-        Answer  = answer;
+        Answer = answer;
         OptionA = optionA;
         OptionB = optionB;
         OptionC = optionC;
@@ -38,6 +42,14 @@ public class Question {
 
     public void setId(int id) {
         Id = id;
+    }
+
+    public int getDifficultyId() {
+        return DifficultyId;
+    }
+
+    public void setDifficultyId(int difficultyId) {
+        DifficultyId = difficultyId;
     }
 
     public String getQuestion() {
